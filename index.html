@@ -577,6 +577,38 @@
       transform: translateY(-2px);
     }
 
+    .video-box {
+      position: relative;
+      background: var(--bg-subtle);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-sm);
+      aspect-ratio: 9 / 16;
+      overflow: hidden;
+      transition: var(--transition);
+    }
+    .video-box:hover {
+      border-color: var(--ink-primary);
+      transform: translateY(-2px);
+    }
+    .video-box video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .video-overlay {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 10px 8px;
+      background: linear-gradient(180deg, transparent 0%, rgba(10,10,10,0.9) 100%);
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+    }
+
     .reel-tag {
       font-family: var(--font-mono);
       font-size: 9.5px;
@@ -1080,7 +1112,7 @@
               <p>Key Impact: High-retention Reels driving reach across 13K+ community; produced official <em>KabaliTACtakan</em> podcast releases.</p>
             </div>
 
-            <!-- 3 Reels Micro-Grid -->
+            <!-- 5 Reels Micro-Grid (3 FB Reels + 2 TikTok videos embedded) -->
             <div class="reels-grid">
               <a href="https://www.facebook.com/reel/1439412988378396" target="_blank" rel="noopener" class="reel-box">
                 <span class="reel-tag">Reel 1</span>
@@ -1097,16 +1129,26 @@
                 <span class="reel-name">Event Showcase</span>
                 <span class="reel-action">Watch ↗</span>
               </a>
-              <a href="https://www.tiktok.com/@hello.ads.ai/video/7653858975523376391" target="_blank" rel="noopener" class="reel-box">
-                <span class="reel-tag">TikTok 1</span>
-                <span class="reel-name">hello.ads.ai</span>
-                <span class="reel-action">Watch ↗</span>
-              </a>
-              <a href="https://www.tiktok.com/@themanwhosawtomorrow/video/7710024168863010069" target="_blank" rel="noopener" class="reel-box">
-                <span class="reel-tag">TikTok 2</span>
-                <span class="reel-name">The Man Who Saw Tomorrow</span>
-                <span class="reel-action">Watch ↗</span>
-              </a>
+              <div class="video-box">
+                <video controls preload="metadata" playsinline>
+                  <source src="videos/hello.ads.ai_7653858975523376391.mp4" type="video/mp4">
+                  Your browser does not support the video tag.
+                </video>
+                <div class="video-overlay">
+                  <span class="reel-tag">TikTok 1</span>
+                  <span class="reel-name">hello.ads.ai</span>
+                </div>
+              </div>
+              <div class="video-box">
+                <video controls preload="metadata" playsinline>
+                  <source src="videos/themanwhosawtomorrow_7710024168863010069.mp4" type="video/mp4">
+                  Your browser does not support the video tag.
+                </video>
+                <div class="video-overlay">
+                  <span class="reel-tag">TikTok 2</span>
+                  <span class="reel-name">The Man Who Saw Tomorrow</span>
+                </div>
+              </div>
             </div>
 
             <div class="tags-row">
