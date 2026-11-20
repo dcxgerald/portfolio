@@ -974,6 +974,71 @@
         padding: 48px 0 !important;
       }
     }
+    /* ---- Phone polish ---- */
+    @media (max-width: 640px) {
+      .hero { padding-top: 40px !important; padding-bottom: 36px !important; }
+      .status-badge { font-size: 10.5px !important; text-align: center; line-height: 1.5; }
+
+      /* stats: tidy 2x2 grid instead of a tall stack */
+      .hero-proof-strip {
+        display: grid !important;
+        grid-template-columns: 1fr 1fr;
+        gap: 10px !important;
+      }
+      .proof-item {
+        flex-direction: column;
+        justify-content: center;
+        text-align: center;
+        gap: 2px !important;
+        padding: 14px 8px !important;
+        border-radius: 14px !important;
+        font-size: 11.5px !important;
+        line-height: 1.35;
+      }
+
+      .section-header { margin-bottom: 28px !important; }
+      .section-title { font-size: clamp(26px, 8vw, 32px) !important; }
+
+      /* filter tabs: one swipeable row */
+      .filter-bar {
+        flex-wrap: nowrap !important;
+        justify-content: flex-start !important;
+        overflow-x: auto;
+        gap: 8px;
+        margin: 0 -16px 28px !important;
+        padding: 2px 16px 8px;
+        scrollbar-width: none;
+        -webkit-overflow-scrolling: touch;
+      }
+      .filter-bar::-webkit-scrollbar { display: none; }
+      .filter-pill { white-space: nowrap; flex: 0 0 auto; padding: 8px 16px !important; }
+
+      .work-item { padding: 20px 16px !important; }
+      .work-top-row { flex-wrap: wrap; gap: 8px; }
+      .impact-callout { padding: 12px 14px !important; }
+
+      /* reels: 3 FB links as a row, videos 2x2 below */
+      .reels-grid { grid-template-columns: repeat(2, 1fr) !important; gap: 10px !important; }
+      .reel-box:nth-child(3) { grid-column: span 2; }
+      .reel-box { padding: 12px 8px !important; }
+      .reel-tag { font-size: 10px !important; }
+      .reel-name { font-size: 12.5px !important; line-height: 1.3; }
+      .reel-action { font-size: 11px !important; }
+      .video-overlay { padding: 24px 8px 8px !important; }
+      .video-overlay .reel-name { font-size: 11.5px !important; }
+
+      .tags-row { gap: 6px !important; }
+      .profile-card { padding: 24px 18px !important; }
+
+      .contact-card { padding: 36px 20px !important; }
+      .contact-grid { grid-template-columns: 1fr !important; gap: 10px !important; }
+      .contact-grid > * { grid-column: 1 / -1 !important; }
+      .contact-headline { font-size: clamp(30px, 9vw, 38px) !important; }
+      .contact-lead { font-size: 14.5px !important; margin-bottom: 24px !important; }
+      .contact-action-btn { padding: 14px 12px !important; font-size: 13px !important; word-break: break-word; text-align: center; }
+
+      .modal-window { width: calc(100vw - 24px) !important; max-height: 88vh; padding: 24px 18px !important; }
+    }
   </style>
 </head>
 <body>
