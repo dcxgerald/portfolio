@@ -903,19 +903,75 @@
         grid-column: span 1;
       }
       .reels-grid {
-        grid-template-columns: 1fr;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
       }
     }
 
     @media (max-width: 640px) {
-      .nav-links {
-        display: none;
+      header .nav-inner {
+        flex-wrap: wrap;
+        height: auto;
+        padding: 10px 0 8px;
+        row-gap: 6px;
       }
       .brand-mark {
         width: 100%;
+        order: 1;
+      }
+      .nav-links {
+        order: 2;
+        width: auto;
+        gap: 18px;
+        flex: 1 1 auto;
+        justify-content: center !important;
+      }
+      .nav-links a {
+        font-size: 11px;
+        letter-spacing: 0.1em;
       }
       .tools-grid {
         grid-template-columns: 1fr;
+      }
+      .hero-h1 {
+        font-size: clamp(36px, 10vw, 56px) !important;
+      }
+      .hero-tagline {
+        font-size: clamp(13px, 4vw, 16px) !important;
+      }
+      .hero-description {
+        font-size: clamp(14px, 3.5vw, 16px) !important;
+      }
+      .proof-item {
+        padding: 12px 8px !important;
+      }
+      .proof-item strong {
+        font-size: clamp(20px, 6vw, 28px) !important;
+      }
+      .video-box {
+        aspect-ratio: 9 / 16;
+        max-width: 100%;
+      }
+      .reel-box {
+        padding: 8px 6px;
+      }
+      .reel-tag {
+        font-size: 8.5px !important;
+      }
+      .reel-name {
+        font-size: 12px !important;
+      }
+      .work-item {
+        padding: 20px !important;
+      }
+      .work-title {
+        font-size: clamp(18px, 5vw, 22px) !important;
+      }
+      .container {
+        padding: 0 16px !important;
+      }
+      section {
+        padding: 48px 0 !important;
       }
     }
   </style>
