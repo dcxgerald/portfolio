@@ -1039,6 +1039,21 @@
 
       .modal-window { width: calc(100vw - 24px) !important; max-height: 88vh; padding: 24px 18px !important; }
     }
+
+    .sub-heading { font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted, #9a9a9a); margin: 32px 0 14px; font-weight: 600; }
+    .compare-note { font-size: 13.5px; color: var(--muted, #9a9a9a); margin: -6px 0 16px; }
+    .compare-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; align-items: start; }
+    .compare-item { margin: 0; }
+    .compare-item .video-box { aspect-ratio: 9 / 16; }
+    .compare-item figcaption { margin-top: 10px; font-size: 13px; display: flex; gap: 8px; align-items: center; }
+    .compare-label { font-size: 10.5px; letter-spacing: 0.12em; text-transform: uppercase; padding: 4px 10px; border-radius: 999px; border: 1px solid rgba(255,255,255,.25); font-weight: 600; }
+    .compare-label.after { border-color: rgba(255,255,255,.7); background: rgba(255,255,255,.1); }
+    .tiktok-grid { grid-template-columns: repeat(3, 1fr); }
+    @media (max-width: 640px) {
+      .tiktok-grid { grid-template-columns: repeat(2, 1fr) !important; }
+      .compare-grid { gap: 10px; }
+      .sub-heading { margin-top: 26px; }
+    }
   </style>
 </head>
 <body>
@@ -1250,24 +1265,18 @@
                 <span class="reel-name">Event Showcase</span>
                 <span class="reel-action">Watch ↗</span>
               </a>
+            </div>
+
+            <!-- TikTok videos -->
+            <h4 class="sub-heading">TikTok Videos</h4>
+            <div class="reels-grid tiktok-grid">
               <div class="video-box">
                 <video controls preload="metadata" playsinline>
-                  <source src="videos/ponds-40s-big-title.mp4" type="video/mp4">
+                  <source src="videos/man-who-saw-tomorrow.mp4" type="video/mp4">
                   Your browser does not support the video tag.
                 </video>
                 <div class="video-overlay">
-                  <span class="reel-tag">Video 1</span>
-                  <span class="reel-name">Ponds 40s Spot</span>
-                </div>
-              </div>
-              <div class="video-box">
-                <video controls preload="metadata" playsinline>
-                  <source src="videos/themanwhosawtomorrow_7710024168863010069.mp4" type="video/mp4">
-                  Your browser does not support the video tag.
-                </video>
-                <div class="video-overlay">
-                  <span class="reel-tag">Video 2</span>
-                  <span class="reel-name">Video 2</span>
+                  <span class="reel-tag">TIKTOK 1</span>
                 </div>
               </div>
               <div class="video-box">
@@ -1276,8 +1285,7 @@
                   Your browser does not support the video tag.
                 </video>
                 <div class="video-overlay">
-                  <span class="reel-tag">Video 3</span>
-                  <span class="reel-name">Albums that got music artists sued</span>
+                  <span class="reel-tag">TIKTOK 2</span>
                 </div>
               </div>
               <div class="video-box">
@@ -1286,10 +1294,31 @@
                   Your browser does not support the video tag.
                 </video>
                 <div class="video-overlay">
-                  <span class="reel-tag">Video 4</span>
-                  <span class="reel-name">MW4 Season 1 Trailer</span>
+                  <span class="reel-tag">TIKTOK 3</span>
                 </div>
               </div>
+            </div>
+
+            <!-- Before / After comparison -->
+            <h4 class="sub-heading">Before vs. After: Client Edit</h4>
+            <p class="compare-note">Client's original footage (left) next to my finished edit (right).</p>
+            <div class="compare-grid">
+              <figure class="compare-item">
+                <div class="video-box">
+                  <video controls preload="metadata" playsinline>
+                    <source src="videos/comparison-before.mp4" type="video/mp4">
+                  </video>
+                </div>
+                <figcaption><span class="compare-label before">Before</span> Original</figcaption>
+              </figure>
+              <figure class="compare-item">
+                <div class="video-box">
+                  <video controls preload="metadata" playsinline>
+                    <source src="videos/comparison-after.mp4" type="video/mp4">
+                  </video>
+                </div>
+                <figcaption><span class="compare-label after">After</span> My edit</figcaption>
+              </figure>
             </div>
 
             <div class="tags-row">
