@@ -1127,6 +1127,59 @@
     .dmadv span:not(.dm-letter) { display: block; font-size: 12.5px; color: var(--ink-secondary); line-height: 1.45; }
     @media (max-width: 900px) { .cert-card { grid-template-columns: 1fr; gap: 24px; padding: 24px 18px; } .cert-title { font-size: 26px; } }
 
+    /* Belt list */
+    .belt-list { list-style: none; display: grid; gap: 8px; margin-top: 8px; }
+    .belt-list li { display: grid; grid-template-columns: 12px 1fr auto; gap: 12px; align-items: center; padding: 10px 12px; border: 1px solid var(--border-subtle); border-radius: var(--radius-sm); background: var(--bg-subtle); }
+    .belt-list strong { display: block; font-size: 13px; color: var(--ink-primary); }
+    .belt-list div span { display: block; font-size: 11.5px; color: var(--ink-muted); line-height: 1.45; }
+    .belt-dot { width: 12px; height: 12px; border-radius: 50%; border: 1px solid var(--border-strong); }
+    .belt-dot.green { background: #2E9E62; } .belt-dot.yellow { background: #D9B341; } .belt-dot.white { background: #F4F1EC; }
+    .belt-link { font-size: 12px; font-weight: 600; color: var(--ink-primary); text-decoration: none; white-space: nowrap; padding: 5px 10px; border-radius: var(--radius-pill); border: 1px solid var(--border-strong); }
+    .belt-link:hover { background: var(--ink-primary); color: var(--on-ink); }
+    @media (max-width: 640px) { .belt-list li { grid-template-columns: 12px 1fr; } .belt-link { grid-column: 2; justify-self: start; } }
+
+    /* Other credentials */
+    .cred-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; margin-top: 16px; }
+    .cred-item { background: var(--bg-surface); border: 1px solid var(--border-subtle); border-radius: var(--radius); padding: 18px 20px; box-shadow: var(--shadow-subtle); display: flex; flex-direction: column; gap: 4px; }
+    .cred-kicker { font-family: var(--font-mono); font-size: 10.5px; letter-spacing: .12em; text-transform: uppercase; color: var(--accent-bronze-dark); font-weight: 600; }
+    .cred-item strong { font-size: 14px; color: var(--ink-primary); line-height: 1.35; }
+    .cred-item > span:last-child { font-size: 12.5px; color: var(--ink-secondary); }
+    .cred-item a { color: var(--accent-navy); font-weight: 600; text-decoration: none; }
+    .cred-item a:hover { text-decoration: underline; }
+    @media (max-width: 900px) { .cred-grid { grid-template-columns: 1fr; } }
+
+    /* Recognition */
+    #recognition { scroll-margin-top: 80px; }
+    .awards { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr); gap: 24px; align-items: center; background: var(--bg-surface); border: 1px solid var(--border-subtle); border-radius: var(--radius); padding: 28px 32px; box-shadow: var(--shadow-subtle); margin-bottom: 28px; }
+    .awards-lead { display: flex; gap: 18px; align-items: center; }
+    .awards-big { font-family: var(--font-serif); font-size: 64px; font-weight: 700; line-height: 1; color: var(--accent-bronze); }
+    :root[data-theme="light"] .awards-big { color: var(--accent-bronze-dark); }
+    .awards-lead strong { display: block; font-family: var(--font-serif); font-size: 24px; color: var(--ink-primary); line-height: 1.2; }
+    .awards-lead div span { display: block; font-size: 13px; color: var(--ink-secondary); margin-top: 4px; }
+    .award-tiles { list-style: none; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; }
+    .award-tiles li { background: var(--bg-subtle); border: 1px solid var(--border-subtle); border-top: 3px solid var(--accent-bronze); border-radius: var(--radius-sm); padding: 14px; text-align: center; }
+    .award-month { display: block; font-weight: 700; font-size: 14px; color: var(--ink-primary); }
+    .award-note { display: block; font-size: 12px; color: var(--ink-secondary); margin-top: 2px; }
+    .quotes { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; }
+    .quote-card { margin: 0; background: var(--bg-surface); border: 1px solid var(--border-subtle); border-radius: var(--radius); padding: 26px 24px; box-shadow: var(--shadow-subtle); display: flex; flex-direction: column; justify-content: space-between; gap: 18px; }
+    .quote-card blockquote { margin: 0; }
+    .quote-card blockquote p { font-family: var(--font-serif); font-size: 19px; line-height: 1.4; color: var(--ink-primary); }
+    .quote-card blockquote p + p { margin-top: 10px; }
+    .quote-card figcaption { border-top: 1px solid var(--border-subtle); padding-top: 14px; display: flex; flex-direction: column; gap: 3px; }
+    .quote-card figcaption strong { font-size: 14px; color: var(--ink-primary); }
+    .quote-card figcaption span { font-size: 12px; color: var(--ink-muted); }
+    .quote-card .quote-context { color: var(--ink-secondary); font-size: 12.5px; line-height: 1.5; margin-top: 4px; }
+    .quotes-note { text-align: center; font-size: 12px; color: var(--ink-muted); margin-top: 18px; }
+    @media (max-width: 900px) {
+      .awards { grid-template-columns: 1fr; padding: 22px 18px; }
+      .quotes { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 640px) {
+      .award-tiles { grid-template-columns: 1fr; }
+      .awards-big { font-size: 52px; }
+      .quote-card blockquote p { font-size: 17.5px; }
+    }
+
     .nav-links .nav-theme { background: none; border: 0; cursor: pointer; font: inherit; color: var(--ink-secondary); font-size: 12.5px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; }
     .nav-links .nav-theme:hover { color: var(--ink-primary); }
     .nav-links .nav-theme:focus-visible { outline: 2px solid var(--accent-bronze); outline-offset: 2px; border-radius: 4px; }
@@ -1325,17 +1378,29 @@
         <div class="cert-text">
           <span class="section-eyebrow" style="text-align:left">Certification</span>
           <h3 class="cert-title">Lean Six Sigma DFSS Green Belt</h3>
-          <p class="cert-meta">Design for Six Sigma · Completed October 2026</p>
+          <p class="cert-meta">Design for Six Sigma · 20-hour program · October 25, 2026</p>
           <p class="about-p">
             Most Six Sigma training teaches you to fix a process that already exists. Design for Six Sigma (DFSS) is about building something new so that it works from day one. The Green Belt covers DMADV, a 15-step roadmap that starts with what the customer actually needs and ends with a tested, documented process.
           </p>
           <p class="about-p">
             It's how I approach the tools I build: start from what the team needs, turn it into requirements I can measure, compare options before building, then verify the result and write the SOP so others can run it.
           </p>
-          <ul class="cert-belts">
-            <li><strong>Green Belt</strong> · DFSS · Oct 2026</li>
-            <li><strong>Yellow Belt</strong> · Apr 2025</li>
-            <li><strong>White Belt</strong> · Service Industry · Feb 2025</li>
+          <ul class="belt-list">
+            <li>
+              <span class="belt-dot green" aria-hidden="true"></span>
+              <div><strong>DFSS Green Belt</strong><span>MF Operational Excellence · Prof. Dr. Marcelo Machado Fernandes, Master Black Belt · 20 hrs · Oct 2026 · ID 117366633</span></div>
+              <a href="certificates/dfss-green-belt.jpg" target="_blank" rel="noopener" class="belt-link">View certificate ↗</a>
+            </li>
+            <li>
+              <span class="belt-dot yellow" aria-hidden="true"></span>
+              <div><strong>Lean Six Sigma Yellow Belt</strong><span>MF Operational Excellence · 20 hrs · Apr 2025 · ID 106018336</span></div>
+              <a href="certificates/lean-six-sigma-yellow-belt.jpg" target="_blank" rel="noopener" class="belt-link">View certificate ↗</a>
+            </li>
+            <li>
+              <span class="belt-dot white" aria-hidden="true"></span>
+              <div><strong>Lean Six Sigma White Belt, Service Industry</strong><span>Six Sigma PH · Feb 2025</span></div>
+              <a href="https://sixsigma.freshlearn.com/certificate/1540246" target="_blank" rel="noopener" class="belt-link">Verify online ↗</a>
+            </li>
           </ul>
         </div>
         <ol class="dmadv" aria-label="The five DMADV phases">
@@ -1345,6 +1410,25 @@
           <li><span class="dm-letter">D</span><div><strong>Design</strong><span>Find the factors that drive results and set them right</span></div></li>
           <li><span class="dm-letter">V</span><div><strong>Verify</strong><span>Check the risks, prove it performs, write the SOP</span></div></li>
         </ol>
+      </div>
+
+      <!-- Other credentials -->
+      <div class="cred-grid">
+        <div class="cred-item">
+          <span class="cred-kicker">Information Security</span>
+          <strong>ISO 27001 &amp; ISO 27701 Compliance Overview for Managers</strong>
+          <span>Plus The Fundamentals of Data Privacy · Emapta Academy · Aug 2023</span>
+        </div>
+        <div class="cred-item">
+          <span class="cred-kicker">Typing</span>
+          <strong>99 wpm at 98.1% accuracy</strong>
+          <span>Ratatype Silver certificate · May 2024 · <a href="https://www.ratatype.com/C7032341EN" target="_blank" rel="noopener">Verify ↗</a></span>
+        </div>
+        <div class="cred-item">
+          <span class="cred-kicker">Performance</span>
+          <strong>3× Top Agent at Secure Parking</strong>
+          <span>Dec 2022 · Mar 2023 · May 2024 · <a href="#recognition">See recognition ↓</a></span>
+        </div>
       </div>
     </div>
   </section>
@@ -1751,6 +1835,7 @@
           </div>
 
           <div class="work-footer-links">
+            <a href="#recognition" class="link-chip">3× Top Agent · customer praise ↓</a>
             <span class="link-chip">Secure Parking (Tenure: 2022–2025)</span>
           </div>
         </div>
@@ -1759,11 +1844,74 @@
     </div>
   </section>
 
+  <!-- Recognition Section -->
+  <section class="section-wrap" id="recognition">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-eyebrow">03 / Recognition</span>
+        <h2 class="section-title">Awards &amp; Customer Words</h2>
+      </div>
+
+      <div class="awards">
+        <div class="awards-lead">
+          <span class="awards-big">3×</span>
+          <div>
+            <strong>Top Agent, Secure Parking</strong>
+            <span>Certificates of Recognition for outstanding overall performance, signed by the CX Operations Manager and Team Leader.</span>
+          </div>
+        </div>
+        <ul class="award-tiles">
+          <li><span class="award-month">December 2022</span><span class="award-note">Top Agent of the month</span></li>
+          <li><span class="award-month">March 2023</span><span class="award-note">Top Agent of the month</span></li>
+          <li><span class="award-month">May 2024</span><span class="award-note">Top Agent · 98.59% average score</span></li>
+        </ul>
+      </div>
+
+      <div class="quotes">
+        <figure class="quote-card">
+          <blockquote>
+            <p>“Not only has Gerald at all times been incredibly professional, polite and understanding, he has expedited and resolved the issues very timeously. He takes the time and trouble to follow up and ensure the problem is solved and the end user is satisfied.”</p>
+            <p>“This level of service and customer care needs to be recognised.”</p>
+          </blockquote>
+          <figcaption>
+            <strong>Jill</strong>
+            <span>Business Manager · monthly parking customer, Sydney · Jul 2022</span>
+            <span class="quote-context">After repeated access-card problems and dropped support calls, I followed up first thing the next morning. Her email was shared with the wider team, and the Financial Controller replied: “Nice job on this one Gerald.”</span>
+          </figcaption>
+        </figure>
+
+        <figure class="quote-card">
+          <blockquote>
+            <p>“Thank you very much for your email, for your help and for your understanding. You are [a] wonderful person and I will always remember you and your kindness.”</p>
+            <p>“It is a great pleasure to know you.”</p>
+          </blockquote>
+          <figcaption>
+            <strong>Kamilla</strong>
+            <span>Former parking customer, Queensland · Sep 2024</span>
+            <span class="quote-context">She had an outstanding balance on a cancelled account. I took her case to my manager, who approved crediting it, and confirmed her balance was cleared. She then asked how to send a commendation to my manager.</span>
+          </figcaption>
+        </figure>
+
+        <figure class="quote-card">
+          <blockquote>
+            <p>“It’s much better now, it’s funny you’ve been the most effective operator I’ve spoken to at your company so far.”</p>
+          </blockquote>
+          <figcaption>
+            <strong>Christian</strong>
+            <span>Monthly parking customer, Sydney · Oct 2022</span>
+            <span class="quote-context">He wrote in to cancel and was considering a formal consumer complaint. I sorted out his parking access the same morning.</span>
+          </figcaption>
+        </figure>
+      </div>
+      <p class="quotes-note">Excerpts from customer emails. Surnames and company details are left out for privacy.</p>
+    </div>
+  </section>
+
   <!-- Tools Section -->
   <section class="section-wrap" id="tools">
     <div class="container">
       <div class="section-header">
-        <span class="section-eyebrow">03 / Capabilities</span>
+        <span class="section-eyebrow">04 / Capabilities</span>
         <h2 class="section-title">Tools & Technical Stack</h2>
       </div>
 
@@ -1929,6 +2077,7 @@
           <ul style="font-size: 13px; color: var(--ink-secondary); margin-left: 20px; margin-top: 6px; line-height: 1.5;">
             <li>Led QA audits across 6 lines of business; reduced operational defects by 10–15% and delivered a 5–7 point NPS lift.</li>
             <li>Authored comprehensive SOPs and de-escalation scripts, resolving 95% of customer escalations in 24–48 hours.</li>
+            <li>Named Top Agent three times (Dec 2022, Mar 2023, May 2024 with a 98.59% average score); commended in writing by customers.</li>
           </ul>
         </div>
       </div>
@@ -1945,7 +2094,8 @@
         <ul style="font-size: 13px; color: var(--ink-secondary); margin-left: 20px; line-height: 1.6;">
           <li><strong>Bachelor of Science in Psychology</strong> — Rizal Technological University</li>
           <li><strong>Lean Six Sigma</strong> — DFSS Green Belt (Oct 2026), Yellow Belt (Apr 2025), White Belt for Service Industry (Feb 2025)</li>
-          <li><strong>Information Security & Data Privacy</strong> — ISO 27001 / ISO 27701 Overview</li>
+          <li><strong>Information Security & Data Privacy</strong> — ISO 27001 &amp; ISO 27701 Compliance Overview for Managers; The Fundamentals of Data Privacy (Emapta Academy, Aug 2023)</li>
+          <li><strong>Typing</strong> — 99 wpm at 98.1% accuracy (Ratatype Silver, May 2024)</li>
         </ul>
       </div>
 
