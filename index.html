@@ -3,8 +3,17 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Gerald Roi</title>
-  
+  <title>Gerald Roi | Operations, Automation & Video Editing</title>
+  <meta name="description" content="Gerald Roi: marketplace operations specialist, Chrome extension and Python automation builder, and short-form video editor based in Manila, Philippines (UTC+8).">
+  <meta name="theme-color" content="#0A0A0A">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Gerald Roi | Operations, Automation & Video Editing">
+  <meta property="og:description" content="Marketplace operations, custom Chrome extensions and Python automations, and short-form video editing. Based in Manila, Philippines (UTC+8).">
+  <meta property="og:url" content="https://dcxgerald.github.io/portfolio/">
+  <meta name="twitter:card" content="summary">
+  <link rel="canonical" href="https://dcxgerald.github.io/portfolio/">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%230A0A0A'/%3E%3Ctext x='32' y='42' text-anchor='middle' font-family='Georgia,serif' font-size='28' font-weight='700' fill='%23C99A4B'%3EGR%3C/text%3E%3C/svg%3E">
+
   <!-- Google Fonts: Cormorant Garamond (Editorial Display) & Plus Jakarta Sans (Clean Modern Body) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -1082,6 +1091,39 @@
       color-scheme: light;
     }
     :root { color-scheme: dark; }
+    /* ---- Layout & polish fixes (Nov 2026) ---- */
+    :root { --contact-fade: #111111; }
+    :root[data-theme="light"] { --contact-fade: #EEEAE3; }
+    #contact { background: linear-gradient(180deg, var(--bg) 0%, var(--contact-fade) 100%); }
+
+    /* Choir card spans the full row so its neighbour is not stretched */
+    .work-item--wide { grid-column: 1 / -1; }
+    /* 7 cards follow the wide one: centre the last so it doesn't sit alone on the left */
+    @media (min-width: 901px) {
+      .works-grid > .work-item:last-child:nth-child(even) { grid-column: 1 / -1; justify-self: center; width: calc(50% - 14px); }
+    }
+    .work-item--wide .reels-grid:not(.tiktok-grid) { max-width: 760px; }
+    .work-item--wide .tiktok-grid { max-width: 760px; }
+    .compare-pair { display: grid; grid-template-columns: 1fr 1fr; gap: 0 32px; }
+    @media (max-width: 900px) { .compare-pair { grid-template-columns: 1fr; } }
+
+    .hero-tagline .nw { white-space: nowrap; }
+
+    .nav-links .nav-theme { background: none; border: 0; cursor: pointer; font: inherit; color: var(--ink-secondary); font-size: 12.5px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; }
+    .nav-links .nav-theme:hover { color: var(--ink-primary); }
+    .nav-links .nav-theme:focus-visible { outline: 2px solid var(--accent-bronze); outline-offset: 2px; border-radius: 4px; }
+
+    @media (max-width: 900px) {
+      /* keep the floating theme button from covering the footer text */
+      footer { padding-bottom: 96px; }
+    }
+    @media (max-width: 640px) {
+      .tiktok-grid { grid-template-columns: repeat(3, 1fr) !important; gap: 8px !important; }
+      .filter-bar { flex-wrap: wrap !important; justify-content: center !important; overflow-x: visible; margin: 0 0 28px !important; padding: 0; }
+      .filter-pill { padding: 7px 13px !important; font-size: 11.5px; }
+      .nav-links .nav-theme { font-size: 11px; letter-spacing: 0.1em; }
+    }
+
     :root[data-theme="light"] .contact-action-btn.featured { background: var(--accent-bronze-dark); color: #FFFFFF; }
     body, header, .work-item, .profile-card, .contact-card { transition: background-color .25s ease, color .25s ease, border-color .25s ease; }
     /* video captions always sit on a dark gradient */
@@ -1123,7 +1165,7 @@
         <ul class="nav-links right">
           <li><a href="#tools">Tools</a></li>
           <li><a href="#contact">Contact</a></li>
-          <li><a href="#" class="nav-theme" id="navTheme" role="button" aria-label="Switch theme"></a></li>
+          <li><button type="button" class="nav-theme" id="navTheme" aria-label="Switch between dark and light mode"></button></li>
         </ul>
       </nav>
     </div>
@@ -1133,7 +1175,7 @@
   <section class="hero" id="hero">
     <div class="container">
       <div class="status-badge">
-        <span class="indicator"></span> Available for Select Clients & Projects · PST / UTC+8
+        <span class="indicator"></span> Available for Select Clients & Projects · PHT (UTC+8)
       </div>
 
       <h1 class="hero-h1">
@@ -1141,11 +1183,11 @@
       </h1>
 
       <p class="hero-tagline">
-        E-Commerce Systems · Chrome Extensions · Short-Form Video Production
+        <span class="nw">E-Commerce Systems</span> · <span class="nw">Chrome Extensions</span> · <span class="nw">Short-Form Video Production</span>
       </p>
 
       <p class="hero-description">
-        Bridging high-volume marketplace operations across global storefronts, custom Chrome MV3 extensions and Python scraping pipelines, and high-retention video storytelling with Lean Six Sigma precision.
+        Bridging high-volume marketplace operations across Australian and North American storefronts, custom Chrome MV3 extensions and Python scraping pipelines, and high-retention video storytelling with Lean Six Sigma precision.
       </p>
 
       <div class="hero-proof-strip">
@@ -1156,10 +1198,10 @@
           <strong>84+</strong> Extension Versions Shipped
         </div>
         <div class="proof-item">
-          <strong>13K+</strong> Social Audience Directed
+          <strong>13K+</strong> Community Followers
         </div>
         <div class="proof-item">
-          <strong>6</strong> Global Marketplace Channels
+          <strong>6</strong> Marketplace Channels
         </div>
       </div>
     </div>
@@ -1221,7 +1263,7 @@
             I don’t just manage workflows; I re-engineer them. Where repetitive friction exists, I build custom extensions and automations to eliminate it.
           </p>
           <p class="about-p">
-            Working since 2021 across enterprise QA, multi-channel e-commerce storefronts, and digital community leadership, I combine analytical rigor with modern software automation and creative production. My background in Psychology informs behavioral design and customer experience, while Lean Six Sigma DFSS methodologies guarantee measured operational efficiency.
+            Working since 2021 across enterprise QA, multi-channel e-commerce storefronts, and digital community leadership, I combine analytical rigor with modern software automation and creative production. My background in Psychology informs behavioral design and customer experience, while Lean Six Sigma DFSS methods keep every improvement measurable.
           </p>
           <p class="about-p">
             In video and media production, I direct dynamic short-form content for social channels using Adobe Premiere Pro, CapCut, and Photoshop — timing cuts to audio tempo, structuring retention hooks, and producing brand assets that turn viewers into engaged community members.
@@ -1267,7 +1309,7 @@
     <div class="container">
       <div class="section-header">
         <span class="section-eyebrow">02 / Portfolio Showcase</span>
-        <h2 class="section-title">Verified Works & Client Impact</h2>
+        <h2 class="section-title">Selected Work & Impact</h2>
       </div>
 
       <!-- Filter Bar -->
@@ -1284,7 +1326,7 @@
       <div class="works-grid">
 
         <!-- 1. TAC Video & Creative Direction -->
-        <div class="work-item" data-category="video">
+        <div class="work-item work-item--wide" data-category="video">
           <div>
             <div class="work-top-row">
               <span class="eyebrow-tag">Video & Creative Direction</span>
@@ -1357,6 +1399,8 @@
             </div>
 
             <!-- Before / After comparison -->
+            <div class="compare-pair">
+            <div>
             <h4 class="sub-heading">Before vs. After: Ponds</h4>
             <p class="compare-note">Client's original footage (left) next to my finished edit (right).</p>
             <div class="compare-grid">
@@ -1377,7 +1421,9 @@
                 <figcaption><span class="compare-label after">After</span> My edit</figcaption>
               </figure>
             </div>
+            </div>
 
+            <div>
             <h4 class="sub-heading">Before vs. After: Nature's Craft</h4>
             <p class="compare-note">Client's original footage (left) next to my finished edit (right).</p>
             <div class="compare-grid">
@@ -1398,8 +1444,10 @@
                 <figcaption><span class="compare-label after">After</span> My edit</figcaption>
               </figure>
             </div>
+            </div>
+            </div>
 
-            <div class="tags-row">
+            <div class="tags-row" style="margin-top: 24px;">
               <span class="code-tag">Adobe Premiere Pro</span>
               <span class="code-tag">CapCut</span>
               <span class="code-tag">Adobe Photoshop</span>
@@ -1481,7 +1529,7 @@
             <h3 class="work-title">Multi-Channel E-Commerce Architecture</h3>
             <p class="work-sub">End-to-End Storefront & Catalog Management</p>
             <p class="work-desc">
-              Administered 300+ SKU product catalogs across 6 international marketplaces (Amazon, Woolworths, Kogan, Bunnings, eBay, and Shopify). Handled complex parent-child variations, listing copy optimization with Helium 10, and continuous catalog health audits.
+              Administered 300+ SKU product catalogs across 6 marketplaces (Amazon, Woolworths, Kogan, Bunnings, eBay, and Shopify). Handled complex parent-child variations, listing copy optimization with Helium 10, and continuous catalog health audits.
             </p>
 
             <div class="impact-callout">
@@ -1498,7 +1546,7 @@
           </div>
 
           <div class="work-footer-links">
-            <span class="link-chip">Ozzca International & Growve</span>
+            <span class="link-chip">Ozzca International</span>
           </div>
         </div>
 
@@ -1580,7 +1628,7 @@
             </p>
 
             <div class="impact-callout">
-              <p>Key Impact: Automated 100% of market search monitoring with instant sub-second Telegram thread alerts.</p>
+              <p>Key Impact: Automated 100% of market search monitoring with real-time Telegram alerts.</p>
             </div>
 
             <div class="tags-row">
@@ -1649,9 +1697,9 @@
             <div class="tool-row">Adobe Premiere Pro <span class="tier">Advanced</span></div>
             <div class="tool-row">CapCut <span class="tier">Advanced</span></div>
             <div class="tool-row">Adobe Photoshop <span class="tier">Proficient</span></div>
-            <div class="tool-row">Short-Form Reels <span class="tier">Dynamic</span></div>
-            <div class="tool-row">Kinetic Typography <span class="tier">Creative</span></div>
-            <div class="tool-row">Audio Tempo Sync <span class="tier">Pacing</span></div>
+            <div class="tool-row">Short-Form Reels <span class="tier">Advanced</span></div>
+            <div class="tool-row">Kinetic Typography <span class="tier">Proficient</span></div>
+            <div class="tool-row">Audio Tempo Sync <span class="tier">Proficient</span></div>
           </div>
         </div>
 
@@ -1664,8 +1712,8 @@
             <div class="tool-row">Python & Playwright <span class="tier">Advanced</span></div>
             <div class="tool-row">Telegram Bot API <span class="tier">Proficient</span></div>
             <div class="tool-row">DOM Scraping & Parsing <span class="tier">Proficient</span></div>
-            <div class="tool-row">Cloudflare Pages <span class="tier">Web Host</span></div>
-            <div class="tool-row">Git & Automation <span class="tier">Workflow</span></div>
+            <div class="tool-row">Cloudflare Pages <span class="tier">Proficient</span></div>
+            <div class="tool-row">Git & GitHub <span class="tier">Proficient</span></div>
           </div>
         </div>
 
@@ -1674,12 +1722,12 @@
           <h3>Marketplaces</h3>
           <p class="sub">E-Commerce</p>
           <div class="tool-list">
-            <div class="tool-row">Amazon Seller Central <span class="tier">Specialist</span></div>
-            <div class="tool-row">Shopify <span class="tier">Operations</span></div>
-            <div class="tool-row">Helium 10 <span class="tier">Keywords</span></div>
-            <div class="tool-row">Linnworks & Magento <span class="tier">Catalog</span></div>
-            <div class="tool-row">Woolworths & Kogan <span class="tier">AU Store</span></div>
-            <div class="tool-row">eBay & Bunnings <span class="tier">Multi-Listing</span></div>
+            <div class="tool-row">Amazon Seller Central <span class="tier">Advanced</span></div>
+            <div class="tool-row">Shopify <span class="tier">Proficient</span></div>
+            <div class="tool-row">Helium 10 <span class="tier">Proficient</span></div>
+            <div class="tool-row">Linnworks & Magento <span class="tier">Working knowledge</span></div>
+            <div class="tool-row">Woolworths & Kogan <span class="tier">Proficient</span></div>
+            <div class="tool-row">eBay & Bunnings <span class="tier">Proficient</span></div>
           </div>
         </div>
 
@@ -1688,12 +1736,12 @@
           <h3>QA & Operations</h3>
           <p class="sub">Methodology</p>
           <div class="tool-list">
-            <div class="tool-row">Lean Six Sigma DFSS <span class="tier">Green Belt</span></div>
-            <div class="tool-row">SOP Development <span class="tier">Expert</span></div>
-            <div class="tool-row">Power BI & Analytics <span class="tier">Reporting</span></div>
+            <div class="tool-row">Lean Six Sigma (Green Belt) <span class="tier">Advanced</span></div>
+            <div class="tool-row">SOP Development <span class="tier">Advanced</span></div>
+            <div class="tool-row">Power BI & Analytics <span class="tier">Working knowledge</span></div>
             <div class="tool-row">Excel Macros & VLOOKUP <span class="tier">Advanced</span></div>
-            <div class="tool-row">Trello API <span class="tier">Automation</span></div>
-            <div class="tool-row">Root Cause Analysis <span class="tier">Compliance</span></div>
+            <div class="tool-row">Trello API <span class="tier">Proficient</span></div>
+            <div class="tool-row">Root Cause Analysis <span class="tier">Advanced</span></div>
           </div>
         </div>
       </div>
@@ -1701,7 +1749,7 @@
   </section>
 
   <!-- Contact Section -->
-  <section class="section-wrap" id="contact" style="background: linear-gradient(180deg, var(--bg) 0%, #111111 100%);">
+  <section class="section-wrap" id="contact">
     <div class="container">
       <div class="contact-card">
         <span class="contact-eyebrow">Direct Contact & Opportunities</span>
@@ -1733,7 +1781,7 @@
         </div>
 
         <p style="font-size: 13px; color: var(--ink-muted);">
-          Based in Manila, Philippines (UTC+8 / PST) · Ready for US, UK, and Australian timezones.
+          Based in Manila, Philippines (PHT, UTC+8) · Ready for US, UK, and Australian timezones.
         </p>
       </div>
     </div>
@@ -1742,14 +1790,14 @@
   <!-- Footer -->
   <footer>
     <div class="container">
-      <p>© 2026 Gerald Roi · Operations, Automation & Creative Portfolio · Crafted with editorial care.</p>
+      <p>© 2026 Gerald Roi · Operations, Automation & Creative Portfolio</p>
     </div>
   </footer>
 
   <!-- Resume Modal -->
   <div class="modal-backdrop" id="resume-modal" onclick="closeOnBackdrop(event)">
     <div class="modal-window">
-      <button class="modal-close-btn" onclick="toggleModal('resume-modal')">×</button>
+      <button class="modal-close-btn" onclick="toggleModal('resume-modal')" aria-label="Close CV">×</button>
       
       <div style="border-bottom: 2px solid var(--ink-primary); padding-bottom: 16px; margin-bottom: 24px;">
         <h2 style="font-family: var(--font-serif); font-size: 32px; color: var(--ink-primary); margin-bottom: 4px;">Gerald Roi</h2>
@@ -1757,7 +1805,7 @@
           Marketplace Specialist · Automation Engineer · Lean Six Sigma DFSS Green Belt · Creative Director
         </p>
         <p style="font-size: 13px; color: var(--ink-muted); margin-top: 4px;">
-          Email: contactgeralddelacruz@gmail.com · LinkedIn: linkedin.com/in/contactgeralddelacruz · OLJ: jobseekers/info/3981136
+          Manila, Philippines (PHT, UTC+8) · Email: contactgeralddelacruz@gmail.com · LinkedIn: linkedin.com/in/contactgeralddelacruz · OLJ: jobseekers/info/3981136
         </p>
       </div>
 
