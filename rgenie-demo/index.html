@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RGenie Assistant Demo | Gerald Roi</title>
+  <meta name="description" content="Interactive demo of RGenie Assistant, a Chrome extension Gerald Roi built to automate lost inbound FBA shipment claims. Runs on sample data.">
+  <meta name="theme-color" content="#0A0A0A">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="RGenie Assistant – Interactive Demo">
+  <meta property="og:description" content="Watch a Chrome extension read BOL PDFs, match shipments, upload proofs and queue UPS proof prints. Sample data.">
+  <meta property="og:url" content="https://dcxgerald.github.io/portfolio/rgenie-demo/">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%230A0A0A'/%3E%3Ctext x='32' y='42' text-anchor='middle' font-family='Georgia,serif' font-size='28' font-weight='700' fill='%23C99A4B'%3EGR%3C/text%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=JetBrains+Mono:wght@400;500;600&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script>
+    (function(){ try { document.documentElement.setAttribute('data-theme', localStorage.getItem('theme') || 'dark'); } catch(e){ document.documentElement.setAttribute('data-theme','dark'); } })();
+  </script>
+  <style>
+    :root {
+      --bg: #0A0A0A; --bg-surface: #141414; --bg-subtle: #1A1A1A; --bg-inset: #0F0F0F;
+      --border-subtle: #2A2A2A; --border-strong: #3A3A3A;
+      --ink-primary: #F0EDE8; --ink-secondary: #C8C4BE; --ink-muted: #8A857F;
+      --accent-bronze: #C99A4B; --accent-bronze-dark: #A87A35; --on-accent: #0A0A0A;
+      --accent-navy: #7FA6CC;
+      --ok: #3DBE7A; --ok-bg: rgba(61,190,122,.12);
+      --info: #7FA6CC; --info-bg: rgba(127,166,204,.14);
+      --warn: #D9A441; --warn-bg: rgba(217,164,65,.13);
+      --bad: #E0705F; --bad-bg: rgba(224,112,95,.13);
+      --header-bg: rgba(10,10,10,.94);
+      --shadow: 0 1px 3px rgba(0,0,0,.4), 0 8px 24px rgba(0,0,0,.35);
+      --font-serif: 'Cormorant Garamond', Georgia, serif;
+      --font-sans: 'Plus Jakarta Sans', system-ui, sans-serif;
+      --font-mono: 'JetBrains Mono', ui-monospace, monospace;
+      --radius: 12px; --radius-sm: 6px;
+      color-scheme: dark;
+    }
+    :root[data-theme="light"] {
+      --bg: #F6F3EE; --bg-surface: #FFFFFF; --bg-subtle: #EEEAE3; --bg-inset: #F9F7F3;
+      --border-subtle: #DDD7CD; --border-strong: #C4BDB0;
+      --ink-primary: #1A1A1A; --ink-secondary: #45413C; --ink-muted: #6E6860;
+      --accent-bronze: #8A6228; --accent-bronze-dark: #8A6228; --on-accent: #FFFFFF;
+      --accent-navy: #2A4A6A;
+      --ok: #1F7A4B; --ok-bg: rgba(31,122,75,.10);
+      --info: #2A4A6A; --info-bg: rgba(42,74,106,.10);
+      --warn: #8A5A12; --warn-bg: rgba(176,120,20,.12);
+      --bad: #A63A2B; --bad-bg: rgba(166,58,43,.10);
+      --header-bg: rgba(246,243,238,.94);
+      --shadow: 0 1px 3px rgba(0,0,0,.08), 0 8px 24px rgba(0,0,0,.08);
+      color-scheme: light;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { background: var(--bg); color: var(--ink-primary); font-family: var(--font-sans); line-height: 1.6; -webkit-font-smoothing: antialiased; }
+    .container { max-width: 1180px; margin: 0 auto; padding: 0 28px; }
+    a { color: inherit; }
+    .mono { font-family: var(--font-mono); }
+
+    header { position: sticky; top: 0; z-index: 50; background: var(--header-bg); backdrop-filter: blur(14px); border-bottom: 1px solid var(--border-subtle); }
+    .nav { display: flex; align-items: center; justify-content: space-between; height: 64px; gap: 16px; }
+    .back { text-decoration: none; font-size: 12.5px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: var(--ink-secondary); }
+    .back:hover { color: var(--ink-primary); }
+    .brand { font-family: var(--font-serif); font-size: 22px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; text-decoration: none; }
+    .theme-btn { background: none; border: 1px solid var(--border-subtle); color: var(--ink-secondary); border-radius: 999px; padding: 6px 14px; font: 600 12px var(--font-sans); letter-spacing: .08em; text-transform: uppercase; cursor: pointer; }
+    .theme-btn:hover { color: var(--ink-primary); border-color: var(--border-strong); }
+    .theme-btn::before { content: "Light"; }
+    :root[data-theme="light"] .theme-btn::before { content: "Dark"; }
+
+    .intro { padding: 56px 0 32px; text-align: center; }
+    .eyebrow { font-family: var(--font-mono); font-size: 11px; letter-spacing: .16em; text-transform: uppercase; color: var(--accent-bronze-dark); font-weight: 600; }
+    h1 { font-family: var(--font-serif); font-size: clamp(38px, 6vw, 60px); line-height: 1.05; margin: 10px 0 14px; font-weight: 700; }
+    .lead { max-width: 680px; margin: 0 auto; color: var(--ink-secondary); font-size: 16px; }
+    .notice { display: inline-flex; gap: 8px; align-items: center; margin-top: 18px; padding: 6px 14px; border-radius: 999px; border: 1px solid var(--border-subtle); background: var(--bg-surface); font-size: 12.5px; color: var(--ink-secondary); }
+    .notice .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--warn); }
+
+    /* Demo layout */
+    .demo { display: grid; grid-template-columns: minmax(0, 1fr) 360px; gap: 24px; align-items: start; padding-bottom: 32px; }
+    .panel { background: var(--bg-surface); border: 1px solid var(--border-subtle); border-radius: var(--radius); box-shadow: var(--shadow); overflow: hidden; }
+    .panel-head { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 12px 16px; border-bottom: 1px solid var(--border-subtle); font-size: 12px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--ink-muted); }
+
+    /* Mock browser */
+    .chrome-bar { display: flex; align-items: center; gap: 12px; padding: 10px 14px; background: var(--bg-subtle); border-bottom: 1px solid var(--border-subtle); }
+    .lights { display: flex; gap: 6px; }
+    .lights span { width: 10px; height: 10px; border-radius: 50%; background: var(--border-strong); }
+    .url { flex: 1; min-width: 0; font-family: var(--font-mono); font-size: 12px; color: var(--ink-muted); background: var(--bg-inset); border: 1px solid var(--border-subtle); border-radius: 999px; padding: 5px 12px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .ext-icon { width: 26px; height: 26px; border-radius: 6px; display: grid; place-items: center; background: var(--accent-bronze); color: var(--on-accent); font: 700 11px var(--font-mono); flex: none; }
+    .ext-icon.busy { animation: pulse 1s ease-in-out infinite; }
+    @keyframes pulse { 50% { opacity: .55; } }
+
+    .portal { padding: 18px; }
+    .portal-title { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; flex-wrap: wrap; margin-bottom: 12px; }
+    .portal-title h2 { font-size: 16px; font-weight: 700; }
+    .portal-title span { font-size: 12.5px; color: var(--ink-muted); }
+    .table-wrap { overflow-x: auto; border: 1px solid var(--border-subtle); border-radius: var(--radius-sm); }
+    table { width: 100%; border-collapse: collapse; font-size: 13px; min-width: 480px; }
+    th { text-align: left; font-size: 11px; letter-spacing: .08em; text-transform: uppercase; color: var(--ink-muted); font-weight: 600; padding: 10px 12px; background: var(--bg-subtle); border-bottom: 1px solid var(--border-subtle); }
+    td { padding: 11px 12px; border-bottom: 1px solid var(--border-subtle); color: var(--ink-secondary); vertical-align: middle; }
+    tr:last-child td { border-bottom: 0; }
+    td.id { font-family: var(--font-mono); font-size: 12.5px; color: var(--ink-primary); }
+    td.num { text-align: right; font-variant-numeric: tabular-nums; }
+    th.num { text-align: right; }
+    tr.active td { background: var(--info-bg); }
+    tr { transition: background-color .3s ease; }
+
+    .pill { display: inline-flex; align-items: center; gap: 6px; padding: 3px 10px; border-radius: 999px; font-size: 11.5px; font-weight: 600; white-space: nowrap; }
+    .pill::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: currentColor; }
+    .s-need { color: var(--warn); background: var(--warn-bg); }
+    .s-match { color: var(--info); background: var(--info-bg); }
+    .s-up { color: var(--ok); background: var(--ok-bg); }
+    .s-review { color: var(--bad); background: var(--bad-bg); }
+
+    .sub-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; padding: 0 18px 18px; }
+    .mini { border: 1px solid var(--border-subtle); border-radius: var(--radius-sm); background: var(--bg-inset); min-height: 210px; }
+    .mini h3 { gap: 8px; white-space: nowrap; font-size: 10.5px; letter-spacing: .1em; text-transform: uppercase; color: var(--ink-muted); font-weight: 600; padding: 10px 12px; border-bottom: 1px solid var(--border-subtle); display: flex; justify-content: space-between; }
+    .mini ul { list-style: none; padding: 6px; }
+    .mini li { display: flex; justify-content: space-between; align-items: center; gap: 8px; padding: 7px 8px; border-radius: 4px; font-family: var(--font-mono); font-size: 12px; color: var(--ink-secondary); transition: background-color .3s ease, color .3s ease; }
+    .mini li .tag { font-family: var(--font-sans); font-size: 11px; font-weight: 600; color: var(--ink-muted); white-space: nowrap; }
+    .mini li.reading { background: var(--info-bg); color: var(--ink-primary); }
+    .mini li.done .tag { color: var(--ok); }
+    .mini li.miss .tag { color: var(--bad); }
+    .mini .empty { padding: 18px 12px; font-family: var(--font-sans); font-size: 12.5px; color: var(--ink-muted); }
+
+    /* Extension popup */
+    .popup { position: sticky; top: 84px; }
+    .popup-top { display: flex; align-items: center; gap: 12px; padding: 16px; border-bottom: 1px solid var(--border-subtle); }
+    .popup-top strong { display: block; font-size: 15px; }
+    .popup-top small { font-family: var(--font-mono); font-size: 11px; color: var(--ink-muted); }
+    .controls { display: flex; gap: 8px; padding: 14px 16px; border-bottom: 1px solid var(--border-subtle); align-items: center; flex-wrap: wrap; }
+    .btn { border: 1px solid transparent; border-radius: var(--radius-sm); padding: 10px 16px; font: 600 13px var(--font-sans); cursor: pointer; transition: transform .15s ease, background-color .15s ease, opacity .15s ease; }
+    .btn:focus-visible, .theme-btn:focus-visible, select:focus-visible, .back:focus-visible { outline: 2px solid var(--accent-bronze); outline-offset: 2px; }
+    .btn-primary { background: var(--accent-bronze); color: var(--on-accent); flex: 1; }
+    .btn-primary:hover:not(:disabled) { transform: translateY(-1px); }
+    .btn-ghost { background: transparent; border-color: var(--border-subtle); color: var(--ink-secondary); }
+    .btn-ghost:hover:not(:disabled) { border-color: var(--border-strong); color: var(--ink-primary); }
+    .btn:disabled { opacity: .45; cursor: not-allowed; }
+    select { background: var(--bg-subtle); color: var(--ink-primary); border: 1px solid var(--border-subtle); border-radius: var(--radius-sm); padding: 9px 8px; font: 600 12.5px var(--font-sans); }
+
+    .progress { height: 4px; background: var(--bg-subtle); }
+    .progress div { height: 100%; width: 0; background: var(--accent-bronze); transition: width .35s ease; }
+
+    .steps { list-style: none; padding: 12px 16px; display: grid; gap: 4px; border-bottom: 1px solid var(--border-subtle); }
+    .steps li { display: grid; grid-template-columns: 22px 1fr; gap: 10px; align-items: start; padding: 6px 0; font-size: 13px; color: var(--ink-muted); }
+    .steps li .n { width: 22px; height: 22px; border-radius: 50%; border: 1px solid var(--border-strong); display: grid; place-items: center; font: 600 11px var(--font-mono); }
+    .steps li.now { color: var(--ink-primary); }
+    .steps li.now .n { border-color: var(--accent-bronze); color: var(--accent-bronze); }
+    .steps li.ok { color: var(--ink-secondary); }
+    .steps li.ok .n { background: var(--ok); border-color: var(--ok); color: var(--bg-surface); }
+    .steps li small { display: block; font-size: 11.5px; color: var(--ink-muted); }
+
+    .log { list-style: none; height: 190px; overflow-y: auto; padding: 10px 16px; font-family: var(--font-mono); font-size: 11.5px; line-height: 1.55; color: var(--ink-secondary); background: var(--bg-inset); }
+    .log li { padding: 1px 0; }
+    .log .t { color: var(--ink-muted); margin-right: 6px; }
+    .log .ok { color: var(--ok); } .log .warn { color: var(--bad); } .log .info { color: var(--info); }
+    .log .idle { color: var(--ink-muted); font-family: var(--font-sans); font-size: 12.5px; }
+
+    .summary { padding: 14px 16px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; border-top: 1px solid var(--border-subtle); }
+    .stat { background: var(--bg-subtle); border-radius: var(--radius-sm); padding: 10px 8px; text-align: center; }
+    .stat b { display: block; font: 700 18px var(--font-mono); color: var(--ink-primary); font-variant-numeric: tabular-nums; }
+    .stat span { font-size: 11px; color: var(--ink-muted); line-height: 1.3; display: block; }
+
+    /* Explainer */
+    section.explain { padding: 56px 0; border-top: 1px solid var(--border-subtle); }
+    .section-head { text-align: center; margin-bottom: 32px; }
+    .section-head h2 { font-family: var(--font-serif); font-size: clamp(30px, 4vw, 40px); font-weight: 600; margin-top: 6px; }
+    .compare { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+    .compare .panel { padding: 22px 24px; }
+    .compare h3 { font-size: 15px; margin-bottom: 12px; display: flex; align-items: center; gap: 10px; }
+    .compare ol { padding-left: 20px; color: var(--ink-secondary); font-size: 14px; display: grid; gap: 6px; }
+    .compare .after ol li::marker { color: var(--ok); }
+    .facts { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 20px; }
+    .fact { background: var(--bg-surface); border: 1px solid var(--border-subtle); border-radius: var(--radius); padding: 20px; text-align: center; }
+    .fact b { display: block; font: 700 28px var(--font-mono); color: var(--ink-primary); }
+    .fact span { font-size: 13px; color: var(--ink-secondary); }
+    .tags { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; margin-top: 24px; }
+    .tags span { font-family: var(--font-mono); font-size: 11.5px; padding: 4px 10px; border: 1px solid var(--border-subtle); border-radius: var(--radius-sm); background: var(--bg-subtle); color: var(--ink-secondary); }
+    .disclaimer { margin-top: 28px; text-align: center; font-size: 12.5px; color: var(--ink-muted); max-width: 720px; margin-left: auto; margin-right: auto; }
+    footer { border-top: 1px solid var(--border-subtle); padding: 28px 0; text-align: center; font-size: 12.5px; color: var(--ink-muted); }
+    footer a { color: var(--ink-secondary); }
+
+    @media (max-width: 960px) {
+      .demo { grid-template-columns: 1fr; }
+      .popup { position: static; order: -1; }
+    }
+    @media (max-width: 640px) {
+      .container { padding: 0 16px; }
+      .intro { padding: 36px 0 24px; }
+      .brand { display: none; }
+      .sub-grid { grid-template-columns: 1fr; padding: 0 12px 12px; }
+      .portal { padding: 12px; }
+      .compare, .facts { grid-template-columns: 1fr; }
+      .log { height: 160px; }
+      table { min-width: 0; font-size: 12px; }
+      th:nth-child(2), td:nth-child(2) { display: none; }
+      th, td { padding: 9px 8px; }
+      td.id { font-size: 11.5px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { transition: none !important; animation: none !important; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container nav">
+      <a class="back" href="../#works">&larr; Portfolio</a>
+      <a class="brand" href="../">Gerald Roi</a>
+      <button class="theme-btn" id="themeBtn" type="button" aria-label="Switch between dark and light mode"></button>
+    </div>
+  </header>
+
+  <main>
+    <section class="intro container">
+      <span class="eyebrow">Automation &amp; Tooling · Interactive demo</span>
+      <h1>RGenie Assistant</h1>
+      <p class="lead">A Chrome extension I built to automate lost inbound FBA shipment claims. It reads the BOL PDFs in a local folder, finds each shipment ID, uploads the proof to the matching claim, and queues the UPS proof for printing. Press <strong>Run audit</strong> to watch it work.</p>
+      <span class="notice"><span class="dot"></span>Recreated for this portfolio with sample data. No real shipments, brands or company systems are shown.</span>
+    </section>
+
+    <section class="container demo" aria-label="RGenie Assistant demo">
+      <!-- Stage: mock browser -->
+      <div class="panel">
+        <div class="chrome-bar">
+          <div class="lights" aria-hidden="true"><span></span><span></span><span></span></div>
+          <div class="url">reimbursement-portal.example/claims?status=lost-inbound</div>
+          <div class="ext-icon" id="extIcon" title="RGenie Assistant" aria-hidden="true">RG</div>
+        </div>
+        <div class="portal">
+          <div class="portal-title">
+            <h2>Lost inbound shipment claims</h2>
+            <span id="portalCount">6 open claims · sample account</span>
+          </div>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>Shipment ID</th><th>Brand</th><th class="num">Est. value</th><th>Status</th></tr></thead>
+              <tbody id="claims"></tbody>
+            </table>
+          </div>
+        </div>
+        <div class="sub-grid">
+          <div class="mini">
+            <h3><span>Local folder · BOL_Proofs/</span><span id="fileCount">0 files</span></h3>
+            <ul id="files"><li class="empty">Not scanned yet.</li></ul>
+          </div>
+          <div class="mini">
+            <h3><span>Print queue · UPS proofs</span><span id="printCount">0</span></h3>
+            <ul id="prints"><li class="empty">Nothing queued.</li></ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Extension popup -->
+      <aside class="panel popup" aria-label="RGenie Assistant extension popup">
+        <div class="popup-top">
+          <div class="ext-icon" aria-hidden="true">RG</div>
+          <div><strong>RGenie Assistant</strong><small>v0.20.2 · Chrome MV3</small></div>
+        </div>
+        <div class="controls">
+          <button class="btn btn-primary" id="runBtn" type="button">Run audit</button>
+          <button class="btn btn-ghost" id="resetBtn" type="button" disabled>Reset</button>
+          <label class="mono" for="speed" style="position:absolute;left:-9999px">Playback speed</label>
+          <select id="speed" aria-label="Playback speed">
+            <option value="1">1x</option>
+            <option value="2" selected>2x</option>
+            <option value="4">4x</option>
+          </select>
+        </div>
+        <div class="progress" aria-hidden="true"><div id="bar"></div></div>
+        <ol class="steps" id="steps">
+          <li data-step="1"><span class="n">1</span><span>Scan BOL folder<small>Find every PDF waiting to be filed</small></span></li>
+          <li data-step="2"><span class="n">2</span><span>Parse PDFs<small>Pull shipment ID, UPS tracking, carton count</small></span></li>
+          <li data-step="3"><span class="n">3</span><span>Match to open claims<small>Flag claims with no proof</small></span></li>
+          <li data-step="4"><span class="n">4</span><span>Upload proofs<small>Attach BOL/POD to each matched claim</small></span></li>
+          <li data-step="5"><span class="n">5</span><span>Queue UPS proofs<small>Send tracking proofs to the printer</small></span></li>
+        </ol>
+        <ol class="log" id="log" aria-live="polite"><li class="idle">Ready. Press Run audit to start.</li></ol>
+        <div class="summary">
+          <div class="stat"><b id="sFiled">0</b><span>Claims filed</span></div>
+          <div class="stat"><b id="sReview">0</b><span>Need review</span></div>
+          <div class="stat"><b id="sTime">0.0s</b><span>Run time</span></div>
+        </div>
+      </aside>
+    </section>
+
+    <section class="explain">
+      <div class="container">
+        <div class="section-head">
+          <span class="eyebrow">What it replaced</span>
+          <h2>One click instead of a manual loop</h2>
+        </div>
+        <div class="compare">
+          <div class="panel">
+            <h3><span class="pill s-review">Before</span> Per claim, by hand</h3>
+            <ol>
+              <li>Open the next BOL PDF from the folder</li>
+              <li>Read the shipment ID and tracking number</li>
+              <li>Search the reimbursement portal for that claim</li>
+              <li>Open the claim and upload the BOL/POD proof</li>
+              <li>Look up the UPS tracking proof</li>
+              <li>Print it and file it</li>
+              <li>Repeat for every shipment</li>
+            </ol>
+          </div>
+          <div class="panel after">
+            <h3><span class="pill s-up">After</span> With RGenie Assistant</h3>
+            <ol>
+              <li>Press Run audit</li>
+              <li>Review the short list of claims it flags as missing proof</li>
+            </ol>
+            <p style="margin-top:14px;font-size:13.5px;color:var(--ink-secondary)">Everything else (reading, matching, uploading and printing) runs on its own, the same way every time. I also wrote the SOP the team follows when using it.</p>
+          </div>
+        </div>
+        <div class="facts">
+          <div class="fact"><b>84</b><span>versions shipped</span></div>
+          <div class="fact"><b>3 wks</b><span>from first build to v0.20.2</span></div>
+          <div class="fact"><b>0</b><span>manual data entry per claim</span></div>
+        </div>
+        <div class="tags">
+          <span>Chrome Manifest V3</span><span>JavaScript</span><span>PDF parsing</span><span>Amazon FBA</span><span>Browser automation</span><span>SOP</span>
+        </div>
+        <p class="disclaimer">This page simulates the extension's workflow so it can be shown publicly. The production tool runs inside a company account. Shipment IDs, brands, values and tracking numbers here are invented, and the portal is a neutral mock-up, not any vendor's real interface.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">© 2026 Gerald Roi · <a href="../">Back to portfolio</a></div>
+  </footer>
+
+  <script>
+    (function(){
+      var root = document.documentElement;
+      var meta = document.querySelector('meta[name="theme-color"]');
+      function setTheme(t){ root.setAttribute('data-theme', t); try { localStorage.setItem('theme', t); } catch(e){} if (meta) meta.setAttribute('content', t === 'light' ? '#F6F3EE' : '#0A0A0A'); }
+      setTheme(root.getAttribute('data-theme') || 'dark');
+      document.getElementById('themeBtn').addEventListener('click', function(){ setTheme(root.getAttribute('data-theme') === 'light' ? 'dark' : 'light'); });
+    })();
+
+    // ---- Sample data (invented) ----
+    var CLAIMS = [
+      { id: 'FBA15K3D9QX2', brand: 'Northwind Home',  units: 48, value: 612.40 },
+      { id: 'FBA15K7M2LP8', brand: 'Harbor & Pine',   units: 24, value: 318.00 },
+      { id: 'FBA15JX4R9TB', brand: 'Northwind Home',  units: 60, value: 790.20 },
+      { id: 'FBA15L0C6WEN', brand: 'Kestrel Outdoor', units: 12, value: 154.80 },
+      { id: 'FBA15KQ8H3ZD', brand: 'Harbor & Pine',   units: 36, value: 471.60 },
+      { id: 'FBA15M2T5YUA', brand: 'Kestrel Outdoor', units: 30, value: 402.00 }
+    ];
+    // One file has a scanner name: the ID is found by reading the PDF, not the filename.
+    // The last claim has no BOL in the folder, so it gets flagged.
+    var FILES = [
+      { name: 'BOL_FBA15K3D9QX2.pdf', id: 'FBA15K3D9QX2', ups: '1Z4F8E0A0391827364', cartons: 4 },
+      { name: 'BOL_FBA15K7M2LP8.pdf', id: 'FBA15K7M2LP8', ups: '1Z4F8E0A0391827411', cartons: 2 },
+      { name: 'scan_0412.pdf',        id: 'FBA15JX4R9TB', ups: '1Z4F8E0A0391827529', cartons: 5 },
+      { name: 'BOL_FBA15L0C6WEN.pdf', id: 'FBA15L0C6WEN', ups: '1Z4F8E0A0391827636', cartons: 1 },
+      { name: 'BOL_FBA15KQ8H3ZD.pdf', id: 'FBA15KQ8H3ZD', ups: '1Z4F8E0A0391827747', cartons: 3 }
+    ];
+    var STATUS = { need: ['s-need','Needs proof'], match: ['s-match','Matched'], up: ['s-up','Proof uploaded'], review: ['s-review','Manual review'] };
+
+    var $ = function(id){ return document.getElementById(id); };
+    var running = false, runId = 0, t0 = 0, timer = null;
+    var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    function money(v){ return '$' + v.toFixed(2); }
+    function sleep(ms, id){
+      var speed = parseFloat($('speed').value) || 1;
+      var d = reduceMotion ? 30 : ms / speed;
+      return new Promise(function(res, rej){ setTimeout(function(){ id === runId ? res() : rej('cancelled'); }, d); });
+    }
+    function el(tag, cls, text){ var e = document.createElement(tag); if (cls) e.className = cls; if (text != null) e.textContent = text; return e; }
+
+    function renderClaims(){
+      var tb = $('claims'); tb.innerHTML = '';
+      CLAIMS.forEach(function(c){
+        var tr = el('tr'); tr.id = 'row-' + c.id;
+        tr.appendChild(el('td', 'id', c.id));
+        tr.appendChild(el('td', null, c.brand));
+        tr.appendChild(el('td', 'num', money(c.value)));
+        var td = el('td'); td.appendChild(el('span', 'pill ' + STATUS.need[0], STATUS.need[1])); tr.appendChild(td);
+        tb.appendChild(tr);
+      });
+    }
+    function setStatus(id, key){
+      var row = $('row-' + id); if (!row) return;
+      var cell = row.lastChild; cell.innerHTML = '';
+      cell.appendChild(el('span', 'pill ' + STATUS[key][0], STATUS[key][1]));
+    }
+    function highlight(id){
+      document.querySelectorAll('#claims tr').forEach(function(r){ r.classList.remove('active'); });
+      if (id) { var r = $('row-' + id); if (r) r.classList.add('active'); }
+    }
+    function log(text, kind){
+      var ul = $('log'); var idle = ul.querySelector('.idle'); if (idle) idle.remove();
+      var li = el('li'); li.appendChild(el('span', 't', ((performance.now() - t0) / 1000).toFixed(1) + 's'));
+      li.appendChild(el('span', kind || null, text)); ul.appendChild(li); ul.scrollTop = ul.scrollHeight;
+    }
+    function setStep(n){
+      document.querySelectorAll('#steps li').forEach(function(li){
+        var s = +li.dataset.step;
+        li.classList.toggle('ok', s < n); li.classList.toggle('now', s === n);
+        if (s === n) li.setAttribute('aria-current', 'step'); else li.removeAttribute('aria-current');
+      });
+      $('bar').style.width = Math.min(100, ((n - 1) / 5) * 100) + '%';
+    }
+    function fileItem(f){
+      var li = el('li'); li.id = 'file-' + f.name.replace(/\W/g, '_');
+      li.appendChild(el('span', null, f.name)); li.appendChild(el('span', 'tag', 'queued'));
+      return li;
+    }
+    function setFile(f, cls, tag){ var li = $('file-' + f.name.replace(/\W/g, '_')); if (!li) return; li.className = cls || ''; li.lastChild.textContent = tag; }
+
+    function reset(){
+      runId++; running = false; clearInterval(timer);
+      renderClaims();
+      $('files').innerHTML = '<li class="empty">Not scanned yet.</li>'; $('fileCount').textContent = '0 files';
+      $('prints').innerHTML = '<li class="empty">Nothing queued.</li>'; $('printCount').textContent = '0';
+      $('log').innerHTML = '<li class="idle">Ready. Press Run audit to start.</li>';
+      $('sFiled').textContent = '0'; $('sReview').textContent = '0'; $('sTime').textContent = '0.0s';
+      $('portalCount').textContent = '6 open claims · sample account';
+      setStep(0); $('bar').style.width = '0';
+      $('runBtn').disabled = false; $('runBtn').textContent = 'Run audit'; $('resetBtn').disabled = true;
+      $('extIcon').classList.remove('busy');
+    }
+
+    async function run(){
+      if (running) return;
+      reset(); var id = runId; running = true;
+      $('runBtn').disabled = true; $('runBtn').textContent = 'Running…'; $('resetBtn').disabled = false;
+      $('extIcon').classList.add('busy');
+      t0 = performance.now();
+      timer = setInterval(function(){ $('sTime').textContent = ((performance.now() - t0) / 1000).toFixed(1) + 's'; }, 100);
+      try {
+        // 1. Scan
+        setStep(1); log('Scanning BOL_Proofs/ …', 'info'); await sleep(700, id);
+        $('files').innerHTML = '';
+        for (var i = 0; i < FILES.length; i++) { $('files').appendChild(fileItem(FILES[i])); $('fileCount').textContent = (i + 1) + ' files'; await sleep(180, id); }
+        log('Found ' + FILES.length + ' PDF files.');
+
+        // 2. Parse
+        setStep(2);
+        for (var j = 0; j < FILES.length; j++) {
+          var f = FILES[j]; setFile(f, 'reading', 'reading…'); await sleep(650, id);
+          setFile(f, 'done', f.id.slice(-6));
+          log(f.name + ' → ' + f.id + ' · ' + f.cartons + ' ctn · UPS ' + f.ups.slice(0, 8) + '…');
+        }
+
+        // 3. Match
+        setStep(3); log('Matching against ' + CLAIMS.length + ' open claims …', 'info'); await sleep(500, id);
+        var review = 0;
+        for (var k = 0; k < CLAIMS.length; k++) {
+          var c = CLAIMS[k]; highlight(c.id); await sleep(380, id);
+          var hit = FILES.some(function(x){ return x.id === c.id; });
+          if (hit) { setStatus(c.id, 'match'); }
+          else { setStatus(c.id, 'review'); review++; log(c.id + ': no BOL in folder, flagged for manual review', 'warn'); $('sReview').textContent = String(review); }
+        }
+        highlight(null); log((CLAIMS.length - review) + ' matched, ' + review + ' flagged.');
+
+        // 4. Upload
+        setStep(4); var filed = 0;
+        for (var m = 0; m < FILES.length; m++) {
+          var fx = FILES[m]; highlight(fx.id); log('Uploading proof to ' + fx.id + ' …'); await sleep(800, id);
+          setStatus(fx.id, 'up'); filed++; $('sFiled').textContent = String(filed);
+          log(fx.id + ': BOL/POD attached', 'ok');
+        }
+        highlight(null);
+
+        // 5. Print
+        setStep(5); $('prints').innerHTML = '';
+        for (var p = 0; p < FILES.length; p++) {
+          var fp = FILES[p]; var li = el('li'); li.appendChild(el('span', null, fp.ups)); li.appendChild(el('span', 'tag', 'sending…'));
+          $('prints').appendChild(li); $('printCount').textContent = String(p + 1); await sleep(420, id);
+          li.className = 'done'; li.lastChild.textContent = 'sent';
+        }
+        log(FILES.length + ' UPS proofs sent to printer.', 'ok');
+
+        setStep(6); $('bar').style.width = '100%';
+        clearInterval(timer); $('sTime').textContent = ((performance.now() - t0) / 1000).toFixed(1) + 's';
+        $('portalCount').textContent = filed + ' filed · ' + review + ' need review';
+        log('Done. ' + filed + ' claims filed, ' + review + ' left for a person to check.', 'ok');
+        $('runBtn').disabled = false; $('runBtn').textContent = 'Run again';
+        $('extIcon').classList.remove('busy'); running = false;
+      } catch (e) { /* reset while running */ }
+    }
+
+    $('runBtn').addEventListener('click', run);
+    $('resetBtn').addEventListener('click', reset);
+    reset();
+  </script>
+</body>
+</html>
