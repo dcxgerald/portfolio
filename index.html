@@ -1229,6 +1229,11 @@
     .compare-item figcaption { flex-wrap: wrap; }
     .skip-link { position: absolute; left: 12px; top: -60px; z-index: 3000; background: var(--accent-bronze); color: var(--on-ink); padding: 10px 16px; border-radius: var(--radius-sm); font-weight: 700; font-size: 14px; text-decoration: none; transition: top .15s ease; }
     .skip-link:focus { top: 12px; }
+    /* TikTok placeholders (videos removed for now) */
+    .video-placeholder { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px; text-align: center; padding: 10px; color: var(--ink-muted); background: repeating-linear-gradient(135deg, var(--bg-subtle) 0 10px, var(--bg-surface) 10px 20px); border-style: dashed; }
+    .video-placeholder:hover { transform: none; border-color: var(--border-strong); }
+    .video-placeholder .ph-title { font-family: var(--font-mono); font-size: 11px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--ink-secondary); }
+    .video-placeholder .ph-note { font-size: 12px; line-height: 1.35; color: var(--ink-muted); }
     :root[data-theme="light"] .contact-action-btn.featured { background: var(--accent-bronze-dark); color: #FFFFFF; }
     body, header, .work-item, .profile-card, .contact-card { transition: background-color .25s ease, color .25s ease, border-color .25s ease; }
     /* video captions always sit on a dark gradient */
@@ -1525,32 +1530,20 @@
             <!-- TikTok videos -->
             <h4 class="sub-heading">TikTok Videos</h4>
             <div class="reels-grid tiktok-grid">
-              <div class="video-box">
-                <video controls preload="none" playsinline poster="videos/posters/tiktok-1.jpg" aria-label="TikTok edit 1">
-                  <source src="videos/man-who-saw-tomorrow.mp4" type="video/mp4">
-                  Your browser does not support the video tag.
-                </video>
-                <div class="video-overlay">
-                  <span class="reel-tag">TIKTOK 1</span>
-                </div>
+              <div class="video-box video-placeholder" role="img" aria-label="TikTok edit 1: new edit coming soon">
+                <svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M10 9.5v5l4.5-2.5z"/></svg>
+                <span class="ph-title">TikTok 1</span>
+                <span class="ph-note">New edit coming soon</span>
               </div>
-              <div class="video-box">
-                <video controls preload="none" playsinline poster="videos/posters/tiktok-2.jpg" aria-label="TikTok edit 2">
-                  <source src="videos/Albums%20that%20got%20music%20artists%20sued%20%5BI71Z__nZPyM%5D.mp4" type="video/mp4">
-                  Your browser does not support the video tag.
-                </video>
-                <div class="video-overlay">
-                  <span class="reel-tag">TIKTOK 2</span>
-                </div>
+              <div class="video-box video-placeholder" role="img" aria-label="TikTok edit 2: new edit coming soon">
+                <svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M10 9.5v5l4.5-2.5z"/></svg>
+                <span class="ph-title">TikTok 2</span>
+                <span class="ph-note">New edit coming soon</span>
               </div>
-              <div class="video-box">
-                <video controls preload="none" playsinline poster="videos/posters/tiktok-3.jpg" aria-label="TikTok edit 3">
-                  <source src="videos/MW4_Season_1_trailer_is_straight_up_crazy_%F0%9F%94%A5_%40Call_of_Duty_%23ad_%23MW4.mp4" type="video/mp4">
-                  Your browser does not support the video tag.
-                </video>
-                <div class="video-overlay">
-                  <span class="reel-tag">TIKTOK 3</span>
-                </div>
+              <div class="video-box video-placeholder" role="img" aria-label="TikTok edit 3: new edit coming soon">
+                <svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M10 9.5v5l4.5-2.5z"/></svg>
+                <span class="ph-title">TikTok 3</span>
+                <span class="ph-note">New edit coming soon</span>
               </div>
             </div>
 
