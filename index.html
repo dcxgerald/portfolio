@@ -1109,6 +1109,24 @@
 
     .hero-tagline .nw { white-space: nowrap; }
 
+    /* Certification card */
+    .proof-link { text-decoration: none; cursor: pointer; }
+    .proof-link:focus-visible { outline: 2px solid var(--accent-bronze); outline-offset: 3px; }
+    #certification { scroll-margin-top: 100px; }
+    .cert-card { margin-top: 44px; display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr); gap: 40px; align-items: center; background: var(--bg-surface); border: 1px solid var(--border-subtle); border-radius: var(--radius); padding: 36px; box-shadow: var(--shadow-subtle); }
+    .cert-title { font-family: var(--font-serif); font-size: 30px; font-weight: 700; line-height: 1.15; color: var(--ink-primary); }
+    .cert-meta { font-size: 12.5px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: var(--accent-navy); margin: 6px 0 16px; }
+    .cert-belts { list-style: none; display: flex; flex-wrap: wrap; gap: 8px; margin-top: 6px; }
+    .cert-belts li { font-size: 12px; color: var(--ink-secondary); background: var(--bg-subtle); border: 1px solid var(--border-subtle); border-radius: var(--radius-pill); padding: 5px 12px; }
+    .cert-belts strong { color: var(--ink-primary); }
+    .dmadv { list-style: none; display: grid; gap: 10px; }
+    .dmadv li { display: grid; grid-template-columns: 40px 1fr; gap: 14px; align-items: center; background: var(--bg-subtle); border: 1px solid var(--border-subtle); border-radius: var(--radius-sm); padding: 12px 14px; }
+    .dm-letter { width: 40px; height: 40px; border-radius: 50%; display: grid; place-items: center; font: 700 18px var(--font-serif); color: var(--on-ink); background: var(--accent-bronze); }
+    :root[data-theme="light"] .dm-letter { background: var(--accent-bronze-dark); color: #FFFFFF; }
+    .dmadv strong { display: block; font-size: 14px; color: var(--ink-primary); }
+    .dmadv span:not(.dm-letter) { display: block; font-size: 12.5px; color: var(--ink-secondary); line-height: 1.45; }
+    @media (max-width: 900px) { .cert-card { grid-template-columns: 1fr; gap: 24px; padding: 24px 18px; } .cert-title { font-size: 26px; } }
+
     .nav-links .nav-theme { background: none; border: 0; cursor: pointer; font: inherit; color: var(--ink-secondary); font-size: 12.5px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; }
     .nav-links .nav-theme:hover { color: var(--ink-primary); }
     .nav-links .nav-theme:focus-visible { outline: 2px solid var(--accent-bronze); outline-offset: 2px; border-radius: 4px; }
@@ -1191,9 +1209,9 @@
       </p>
 
       <div class="hero-proof-strip">
-        <div class="proof-item">
+        <a class="proof-item proof-link" href="#certification">
           <strong>LSS DFSS</strong> Green Belt Certified
-        </div>
+        </a>
         <div class="proof-item">
           <strong>84+</strong> Extension Versions Shipped
         </div>
@@ -1300,6 +1318,33 @@
             </div>
           </div>
         </div>
+      </div>
+
+      <!-- Certification -->
+      <div class="cert-card" id="certification">
+        <div class="cert-text">
+          <span class="section-eyebrow" style="text-align:left">Certification</span>
+          <h3 class="cert-title">Lean Six Sigma DFSS Green Belt</h3>
+          <p class="cert-meta">Design for Six Sigma · Completed October 2026</p>
+          <p class="about-p">
+            Most Six Sigma training teaches you to fix a process that already exists. Design for Six Sigma (DFSS) is about building something new so that it works from day one. The Green Belt covers DMADV, a 15-step roadmap that starts with what the customer actually needs and ends with a tested, documented process.
+          </p>
+          <p class="about-p">
+            It's how I approach the tools I build: start from what the team needs, turn it into requirements I can measure, compare options before building, then verify the result and write the SOP so others can run it.
+          </p>
+          <ul class="cert-belts">
+            <li><strong>Green Belt</strong> · DFSS · Oct 2026</li>
+            <li><strong>Yellow Belt</strong> · Apr 2025</li>
+            <li><strong>White Belt</strong> · Service Industry · Feb 2025</li>
+          </ul>
+        </div>
+        <ol class="dmadv" aria-label="The five DMADV phases">
+          <li><span class="dm-letter">D</span><div><strong>Define</strong><span>Who it's for and what they say they need</span></div></li>
+          <li><span class="dm-letter">M</span><div><strong>Measure</strong><span>Turn the top needs into measurable requirements (CTQs)</span></div></li>
+          <li><span class="dm-letter">A</span><div><strong>Analyze</strong><span>Compare design ideas and pick the strongest one</span></div></li>
+          <li><span class="dm-letter">D</span><div><strong>Design</strong><span>Find the factors that drive results and set them right</span></div></li>
+          <li><span class="dm-letter">V</span><div><strong>Verify</strong><span>Check the risks, prove it performs, write the SOP</span></div></li>
+        </ol>
       </div>
     </div>
   </section>
@@ -1899,7 +1944,7 @@
         <h3 style="font-family: var(--font-serif); font-size: 20px; color: var(--ink-primary); border-bottom: 1px solid var(--border-subtle); padding-bottom: 6px; margin-bottom: 12px;">Education & Certifications</h3>
         <ul style="font-size: 13px; color: var(--ink-secondary); margin-left: 20px; line-height: 1.6;">
           <li><strong>Bachelor of Science in Psychology</strong> — Rizal Technological University</li>
-          <li><strong>Lean Six Sigma DFSS</strong> — Green Belt (Oct 2026), Yellow Belt, White Belt</li>
+          <li><strong>Lean Six Sigma</strong> — DFSS Green Belt (Oct 2026), Yellow Belt (Apr 2025), White Belt for Service Industry (Feb 2025)</li>
           <li><strong>Information Security & Data Privacy</strong> — ISO 27001 / ISO 27701 Overview</li>
         </ul>
       </div>
