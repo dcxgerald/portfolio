@@ -10,6 +10,8 @@
   <meta property="og:title" content="Account Health Monitor – Interactive Demo">
   <meta property="og:description" content="Watch a browser extension check 6 sample brands across two marketplaces, skip what was already reported, and draft the emails and team tracker. Sample data.">
   <meta property="og:url" content="https://dcxgerald.github.io/portfolio/account-health-demo/">
+  <meta property="og:image" content="https://dcxgerald.github.io/portfolio/og-image.png">
+  <meta name="twitter:card" content="summary_large_image">
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%230A0A0A'/%3E%3Ctext x='32' y='42' text-anchor='middle' font-family='Georgia,serif' font-size='28' font-weight='700' fill='%23C99A4B'%3EGR%3C/text%3E%3C/svg%3E">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -36,14 +38,14 @@
     /* Output area */
     .outputs { display: grid; grid-template-columns: minmax(0, 1fr); gap: 16px; padding: 0 18px 18px; }
     .out { min-width: 0; border: 1px solid var(--border-subtle); border-radius: var(--radius-sm); background: var(--bg-inset); }
-    .out h3 { font-size: 10.5px; letter-spacing: .1em; text-transform: uppercase; color: var(--ink-muted); font-weight: 600; padding: 10px 12px; border-bottom: 1px solid var(--border-subtle); display: flex; justify-content: space-between; gap: 8px; align-items: center; }
+    .out h3 { font-size: 11px; letter-spacing: .1em; text-transform: uppercase; color: var(--ink-muted); font-weight: 600; padding: 10px 12px; border-bottom: 1px solid var(--border-subtle); display: flex; justify-content: space-between; gap: 8px; align-items: center; }
     .out .empty { padding: 16px 12px; font-size: 12.5px; color: var(--ink-muted); }
     .drafts { list-style: none; padding: 8px; display: grid; gap: 8px; }
     .draft { border: 1px solid var(--border-subtle); border-radius: var(--radius-sm); background: var(--bg-surface); padding: 10px 12px; font-size: 12.5px; }
     .draft .to { font-size: 11.5px; color: var(--ink-muted); }
     .draft .subj { font-family: var(--font-mono); font-size: 12px; color: var(--ink-primary); margin-top: 3px; word-break: break-word; }
     .tracker { width: 100%; border-collapse: collapse; font-size: 12px; min-width: 520px; }
-    .tracker th { font-size: 10.5px; }
+    .tracker th { font-size: 11px; }
     .tracker td { padding: 8px 10px; font-size: 12px; vertical-align: top; }
     .tracker tr.orange td { color: #E08A3C; font-weight: 700; }
     .tracker tr.blue td { color: #5B9BD5; font-weight: 700; }
@@ -53,8 +55,8 @@
     .copy-btn { background: none; border: 1px solid var(--border-subtle); color: var(--ink-secondary); border-radius: 999px; padding: 3px 10px; font: 600 11px var(--font-sans); letter-spacing: 0; text-transform: none; cursor: pointer; }
     .copy-btn:hover:not(:disabled) { color: var(--ink-primary); border-color: var(--border-strong); }
     .copy-btn:disabled { opacity: .45; cursor: not-allowed; }
-    .chip-sent { display: inline-block; margin-left: 6px; font: 600 10.5px var(--font-sans); color: var(--ink-muted); background: var(--bg-subtle); border-radius: 999px; padding: 1px 8px; }
-    @media (max-width: 640px) { .outputs { padding: 0 12px 12px; } .grid-table th, .grid-table td { padding: 8px 3px; font-size: 11px; } .grid-table th { font-size: 9.5px; letter-spacing: .02em; } .cell { min-width: 0; padding: 2px 5px; } }
+    .chip-sent { display: inline-block; margin-left: 6px; font: 600 11px var(--font-sans); color: var(--ink-muted); background: var(--bg-subtle); border-radius: 999px; padding: 1px 8px; }
+    @media (max-width: 640px) { .outputs { padding: 0 12px 12px; } .grid-table th, .grid-table td { padding: 8px 3px; font-size: 11px; } .grid-table th { font-size: 10px; letter-spacing: .02em; } .cell { min-width: 0; padding: 2px 5px; } }
   </style>
 </head>
 <body>
