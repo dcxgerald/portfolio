@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BSR Monitoring Demo | Gerald Roi</title>
+  <meta name="description" content="Interactive demo of BSR Monitoring, a browser extension Gerald Roi built to check whether tracked products still hold #1 in their Best Sellers Rank category. Runs on sample data.">
+  <meta name="theme-color" content="#0A0A0A">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="BSR Monitoring – Interactive Demo">
+  <meta property="og:description" content="Watch a browser extension read each product's Best Sellers Rank, flag changes since the last check, pause for a person on verification pages, and build the team report. Sample data.">
+  <meta property="og:url" content="https://dcxgerald.github.io/portfolio/bsr-demo/">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%230A0A0A'/%3E%3Ctext x='32' y='42' text-anchor='middle' font-family='Georgia,serif' font-size='28' font-weight='700' fill='%23C99A4B'%3EGR%3C/text%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=JetBrains+Mono:wght@400;500;600&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script>
+    (function(){ try { document.documentElement.setAttribute('data-theme', localStorage.getItem('theme') || 'dark'); } catch(e){ document.documentElement.setAttribute('data-theme','dark'); } })();
+  </script>
+  <link rel="stylesheet" href="../demo-assets/demo.css">
+  <style>
+    /* Mock product page */
+    .page { padding: 20px; min-height: 250px; }
+    .page .crumb { font-size: 11.5px; color: var(--ink-muted); margin-bottom: 6px; }
+    .page h2 { font-size: 18px; font-weight: 700; margin-bottom: 4px; }
+    .page .brand-line { font-size: 13px; color: var(--accent-navy); margin-bottom: 16px; }
+    .details { border: 1px solid var(--border-subtle); border-radius: var(--radius-sm); overflow: hidden; }
+    .details div { display: grid; grid-template-columns: 150px 1fr; gap: 12px; padding: 9px 12px; font-size: 13px; border-bottom: 1px solid var(--border-subtle); }
+    .details div:last-child { border-bottom: 0; }
+    .details dt, .details .k { color: var(--ink-muted); }
+    .rank-lines span { display: block; }
+    .rank-lines .hl { margin-top: 2px; padding: 2px 6px; border-radius: 4px; transition: background-color .3s ease, outline-color .3s ease; outline: 2px solid transparent; }
+    .rank-lines .hl.reading { background: var(--info-bg); outline-color: var(--info); }
+    .page-empty { color: var(--ink-muted); font-size: 13px; padding: 40px 0; text-align: center; }
+
+    .verify { text-align: center; padding: 34px 16px; }
+    .verify h2 { font-size: 18px; margin-bottom: 6px; }
+    .verify p { color: var(--ink-secondary); font-size: 13.5px; max-width: 420px; margin: 0 auto 16px; }
+    .verify .btn { flex: none; }
+
+    /* Product cards in the panel */
+    .cards { list-style: none; padding: 10px 12px; display: grid; gap: 6px; max-height: 340px; overflow-y: auto; border-bottom: 1px solid var(--border-subtle); }
+    .pcard { border: 1px solid var(--border-subtle); border-left: 3px solid var(--border-strong); border-radius: var(--radius-sm); padding: 8px 10px; font-size: 12.5px; background: var(--bg-surface); transition: border-color .3s ease, background-color .3s ease; }
+    .pcard .top { display: flex; justify-content: space-between; gap: 8px; align-items: center; }
+    .pcard .name { font-weight: 600; color: var(--ink-primary); }
+    .pcard .meta { font-size: 11.5px; color: var(--ink-muted); margin-top: 2px; }
+    .pcard .line { font-family: var(--font-mono); font-size: 11px; color: var(--ink-secondary); margin-top: 3px; }
+    .pcard.now { border-left-color: var(--info); background: var(--info-bg); }
+    .pcard.yes { border-left-color: var(--ok); }
+    .pcard.no { border-left-color: var(--warn); }
+    .pcard.changed { border-left-color: var(--bad); background: var(--bad-bg); }
+    .pcard .flag { font-size: 11px; font-weight: 600; color: var(--bad); margin-top: 3px; }
+    .tagc { font: 600 10px var(--font-mono); letter-spacing: .06em; text-transform: uppercase; color: var(--ink-muted); border: 1px solid var(--border-subtle); border-radius: 999px; padding: 1px 7px; }
+    .pause-bar { display: none; padding: 10px 16px; background: var(--warn-bg); color: var(--warn); font-size: 12.5px; font-weight: 600; border-bottom: 1px solid var(--border-subtle); gap: 8px; align-items: center; justify-content: space-between; flex-wrap: wrap; }
+    .pause-bar.on { display: flex; }
+    .pause-bar .btn { padding: 6px 12px; font-size: 12px; flex: none; }
+
+    /* Report */
+    .report { padding: 0 18px 18px; }
+    .report .out { border: 1px solid var(--border-subtle); border-radius: var(--radius-sm); background: var(--bg-inset); }
+    .report h3 { font-size: 10.5px; letter-spacing: .1em; text-transform: uppercase; color: var(--ink-muted); font-weight: 600; padding: 10px 12px; border-bottom: 1px solid var(--border-subtle); display: flex; justify-content: space-between; gap: 8px; align-items: center; }
+    .report .msg { padding: 10px 12px 4px; font-size: 13px; color: var(--ink-secondary); }
+    .report table { min-width: 0; }
+    .copy-btn { background: none; border: 1px solid var(--border-subtle); color: var(--ink-secondary); border-radius: 999px; padding: 3px 10px; font: 600 11px var(--font-sans); letter-spacing: 0; text-transform: none; cursor: pointer; }
+    .copy-btn:hover:not(:disabled) { color: var(--ink-primary); border-color: var(--border-strong); }
+    .copy-btn:disabled { opacity: .45; cursor: not-allowed; }
+    @media (max-width: 640px) { .page { padding: 14px; } .details div { grid-template-columns: 1fr; gap: 2px; } .report { padding: 0 12px 12px; } }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container nav">
+      <a class="back" href="../#works">&larr; Portfolio</a>
+      <a class="brand" href="../">Gerald Roi</a>
+      <button class="theme-btn" id="themeBtn" type="button" aria-label="Switch between dark and light mode"></button>
+    </div>
+  </header>
+
+  <main>
+    <section class="intro container">
+      <span class="eyebrow">Automation &amp; Marketplaces · Interactive demo</span>
+      <h1>BSR Monitoring</h1>
+      <p class="lead">A browser extension I built for the daily Best Sellers Rank check. It opens each tracked product in turn, reads the rank line, marks <strong>Yes</strong> if the product is #1 in its expected category (or copies the actual rank), flags anything that changed since the last check, and builds the team report. Press <strong>Run all</strong>. Partway through, a verification page appears and the run waits for you.</p>
+      <span class="notice"><span class="dot"></span>Recreated for this portfolio with sample data. No real products, brands or marketplace pages are shown.</span>
+    </section>
+
+    <section class="container demo" aria-label="BSR Monitoring demo">
+      <div class="panel">
+        <div class="chrome-bar">
+          <div class="lights" aria-hidden="true"><span></span><span></span><span></span></div>
+          <div class="url" id="url">product-page.example</div>
+          <div class="ext-icon" id="extIcon" title="BSR Monitoring" aria-hidden="true">BSR</div>
+        </div>
+        <div class="page" id="page"><div class="page-empty">The product pages open here one at a time.</div></div>
+        <div class="report">
+          <div class="out">
+            <h3><span>Team report</span><button class="copy-btn" id="copyBtn" type="button" disabled>Copy for team chat</button></h3>
+            <p class="msg">Hi Team, Here's today's BSR check for the tracked products.</p>
+            <div class="table-wrap" style="border:0;border-radius:0">
+              <table>
+                <thead><tr><th>Brand</th><th>Product</th><th>BSR badge showing?</th></tr></thead>
+                <tbody id="report"><tr><td colspan="3" style="color:var(--ink-muted)">Filled in after the run. Watchlist products only appear if they are #1.</td></tr></tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <aside class="panel popup" aria-label="BSR Monitoring side panel">
+        <div class="popup-top">
+          <div class="ext-icon" aria-hidden="true">BSR</div>
+          <div><strong>BSR Monitoring</strong><small>v0.2.7 · browser extension</small></div>
+        </div>
+        <div class="controls">
+          <button class="btn btn-primary" id="runBtn" type="button">Run all 10</button>
+          <button class="btn btn-ghost" id="resetBtn" type="button" disabled>Reset</button>
+          <select id="speed" aria-label="Playback speed">
+            <option value="1">1x</option>
+            <option value="2" selected>2x</option>
+            <option value="4">4x</option>
+          </select>
+        </div>
+        <div class="progress" aria-hidden="true"><div id="bar"></div></div>
+        <div class="pause-bar" id="pauseBar" role="alert">
+          <span id="pauseText">Paused: verification page</span>
+          <span style="display:flex;gap:6px"><button class="btn btn-primary" id="resumeBtn" type="button">I cleared it, resume</button><button class="btn btn-ghost" id="skipBtn" type="button">Skip</button></span>
+        </div>
+        <ul class="cards" id="cards"></ul>
+        <ol class="log" id="log" aria-live="polite" style="height:130px"><li class="idle">Ready. Press Run all 10.</li></ol>
+        <div class="summary">
+          <div class="stat"><b id="sYes">0</b><span>#1 (Yes)</span></div>
+          <div class="stat"><b id="sNo">0</b><span>Not #1</span></div>
+          <div class="stat"><b id="sChg">0</b><span>Changed</span></div>
+        </div>
+      </aside>
+    </section>
+
+    <section class="explain">
+      <div class="container">
+        <div class="section-head">
+          <span class="eyebrow">What it replaced</span>
+          <h2>Seven steps per product, down to one run</h2>
+        </div>
+        <div class="compare">
+          <div class="panel">
+            <h3><span class="pill s-review">Before</span> For each product, by hand</h3>
+            <ol>
+              <li>Open the product link from the tracking sheet</li>
+              <li>Copy the ASIN from the address bar</li>
+              <li>Search the page for it to reach Product details</li>
+              <li>Read the Best Sellers Rank sub-category line</li>
+              <li>Compare it with the expected category: is it #1?</li>
+              <li>Write the result in the sheet</li>
+              <li>Repeat for all 20, then build the team message</li>
+            </ol>
+          </div>
+          <div class="panel after">
+            <h3><span class="pill s-up">After</span> With BSR Monitoring</h3>
+            <ol>
+              <li>Press Run all</li>
+              <li>Clear a verification page yourself if one appears</li>
+              <li>Check anything flagged red or changed</li>
+              <li>Copy the report into the team chat</li>
+            </ol>
+            <p style="margin-top:14px;font-size:13.5px;color:var(--ink-secondary)">It visits one product at a time in a visible tab, never tries to get past a verification page, never changes anything on the site, and never posts the report itself. History is kept so a product that lost #1 is flagged straight away.</p>
+          </div>
+        </div>
+        <div class="facts">
+          <div class="fact"><b>20</b><span>products, 12 brands, checked daily</span></div>
+          <div class="fact"><b>140</b><span>manual steps a day replaced (7 × 20)</span></div>
+          <div class="fact"><b>8</b><span>versions, v0.1.0 to v0.2.7</span></div>
+        </div>
+        <div class="tags">
+          <span>Browser extension (Edge / Chromium)</span><span>JavaScript</span><span>Side panel UI</span><span>Rule engine</span><span>Change history</span><span>CSV export</span>
+        </div>
+        <p class="disclaimer">This page simulates the extension's workflow so it can be shown publicly. The production tool checks 20 products. The brands, products, categories and ranks here are invented, the product page is a neutral mock-up rather than any marketplace's real interface, and the demo uses 10 products (8 tracked, 2 on the watchlist) to keep it short.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">© 2026 Gerald Roi · <a href="../">Back to portfolio</a> · <a href="../rgenie-demo/">RGenie demo</a> · <a href="../account-health-demo/">Account Health demo</a></div>
+  </footer>
+
+  <script>
+    (function(){
+      var root = document.documentElement, meta = document.querySelector('meta[name="theme-color"]');
+      function setTheme(t){ root.setAttribute('data-theme', t); try { localStorage.setItem('theme', t); } catch(e){} if (meta) meta.setAttribute('content', t === 'light' ? '#F6F3EE' : '#0A0A0A'); }
+      setTheme(root.getAttribute('data-theme') || 'dark');
+      document.getElementById('themeBtn').addEventListener('click', function(){ setTheme(root.getAttribute('data-theme') === 'light' ? 'dark' : 'light'); });
+    })();
+
+    // ---- Sample data (invented) ----
+    // rank: the sub-category rank found on the page. last: yesterday's result. watch: only reported if #1.
+    var PRODUCTS = [
+      { brand: 'Juniper Labs',    name: 'Turmeric Curcumin 90ct',   asin: 'B0SAMPLE01', cat: 'Turmeric Herbal Supplements',     main: '#709 in Health & Household',   rank: 1, last: 'Yes' },
+      { brand: 'Ridgeway Supply', name: 'Omega 3 Fish Oil',         asin: 'B0SAMPLE02', cat: 'Omega 3 Nutritional Supplements', main: '#212 in Health & Household',   rank: 1, last: 'Yes', volatile: true, verify: true },
+      { brand: 'Northwind Home',  name: 'Bamboo Drawer Organizer',  asin: 'B0SAMPLE03', cat: 'Drawer Organizers',               main: '#1,433 in Home & Kitchen',     rank: 1, last: 'Yes' },
+      { brand: 'Harbor & Pine',   name: 'Cedar Closet Blocks 24pk', asin: 'B0SAMPLE04', cat: 'Cedar Blocks',                    main: '#2,018 in Home & Kitchen',     rank: 1, last: 'Yes' },
+      { brand: 'Kestrel Outdoor', name: 'Trail Headlamp 400',       asin: 'B0SAMPLE05', cat: 'Headlamps',                       main: '#3,560 in Sports & Outdoors',  rank: 3, last: 'Yes' },
+      { brand: 'Bluefin Pet',     name: 'Salmon Oil for Dogs',      asin: 'B0SAMPLE06', cat: 'Dog Fish Oil Supplements',        main: '#98 in Pet Supplies',          rank: 1, last: 'Yes' },
+      { brand: 'Juniper Labs',    name: 'Milk Thistle 120ct',       asin: 'B0SAMPLE07', cat: 'Milk Thistle Herbal Supplements', main: '#1,876 in Health & Household', rank: 4, last: 'No - #4 in Milk Thistle Herbal Supplements' },
+      { brand: 'Ridgeway Supply', name: 'Magnesium Glycinate',      asin: 'B0SAMPLE08', cat: 'Magnesium Mineral Supplements',   main: '#655 in Health & Household',   rank: 1, last: 'No - #2 in Magnesium Mineral Supplements' },
+      { brand: 'Kestrel Outdoor', name: 'Insulated Camp Mug',       asin: 'B0SAMPLE09', cat: 'Camping Mugs',                    main: '#4,210 in Sports & Outdoors',  rank: 1, last: 'No - #2 in Camping Mugs', watch: true },
+      { brand: 'Bluefin Pet',     name: 'Cat Dental Treats',        asin: 'B0SAMPLE10', cat: 'Cat Dental Treats',               main: '#1,102 in Pet Supplies',       rank: 2, last: 'No - #2 in Cat Dental Treats', watch: true }
+    ];
+
+    var $ = function(id){ return document.getElementById(id); };
+    var running = false, runId = 0, t0 = 0, results = [], resumeFn = null;
+    var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    function sleep(ms, id){ var sp = parseFloat($('speed').value) || 1; var d = reduceMotion ? 30 : ms / sp; return new Promise(function(res, rej){ setTimeout(function(){ id === runId ? res() : rej('cancelled'); }, d); }); }
+    function el(tag, cls, text){ var e = document.createElement(tag); if (cls) e.className = cls; if (text != null) e.textContent = text; return e; }
+    function log(text, kind){ var ul = $('log'); var idle = ul.querySelector('.idle'); if (idle) idle.remove(); var li = el('li'); li.appendChild(el('span', 't', ((performance.now() - t0) / 1000).toFixed(1) + 's')); li.appendChild(el('span', kind || null, text)); ul.appendChild(li); ul.scrollTop = ul.scrollHeight; }
+    function verdict(p){ return p.rank === 1 ? 'Yes' : 'No - #' + p.rank + ' in ' + p.cat; }
+
+    function renderCards(){
+      var ul = $('cards'); ul.innerHTML = '';
+      PRODUCTS.forEach(function(p, i){
+        var li = el('li', 'pcard'); li.id = 'p' + i;
+        var top = el('div', 'top'); top.appendChild(el('span', 'name', p.name));
+        if (p.watch) top.appendChild(el('span', 'tagc', 'watchlist')); else if (p.volatile) top.appendChild(el('span', 'tagc', 'volatile'));
+        li.appendChild(top);
+        li.appendChild(el('div', 'meta', p.brand + ' · ' + p.asin + ' · expects #1 in ' + p.cat));
+        li.appendChild(el('div', 'line', 'Last check: ' + p.last));
+        ul.appendChild(li);
+      });
+    }
+    function showPage(p){
+      $('url').textContent = 'product-page.example/dp/' + p.asin;
+      var pg = $('page'); pg.innerHTML = '';
+      pg.appendChild(el('div', 'crumb', p.main.replace(/^#[\d,]+ in /, '') + ' › ' + p.cat));
+      pg.appendChild(el('h2', null, p.name));
+      pg.appendChild(el('div', 'brand-line', 'Brand: ' + p.brand));
+      var d = el('div', 'details');
+      function row(k, v){ var r = el('div'); r.appendChild(el('span', 'k', k)); if (typeof v === 'string') r.appendChild(el('span', null, v)); else r.appendChild(v); d.appendChild(r); }
+      row('ASIN', p.asin);
+      var rl = el('span', 'rank-lines'); rl.appendChild(el('span', null, p.main)); var hl = el('span', 'hl', '#' + p.rank + ' in ' + p.cat); hl.id = 'hl'; rl.appendChild(hl);
+      row('Best Sellers Rank', rl);
+      row('Date first available', 'March 3, 2024');
+      pg.appendChild(d);
+    }
+    function showVerify(){
+      $('url').textContent = 'product-page.example/verify';
+      var pg = $('page'); pg.innerHTML = '';
+      var v = el('div', 'verify');
+      v.appendChild(el('h2', null, 'Verification required'));
+      v.appendChild(el('p', null, 'The site wants to confirm a person is browsing. The extension will not click through this. In the real tool you complete it yourself in this tab; here, press the button in the panel.'));
+      pg.appendChild(v);
+    }
+
+    function reset(){
+      runId++; running = false; results = []; resumeFn = null;
+      renderCards();
+      $('page').innerHTML = '<div class="page-empty">The product pages open here one at a time.</div>'; $('url').textContent = 'product-page.example';
+      $('report').innerHTML = '<tr><td colspan="3" style="color:var(--ink-muted)">Filled in after the run. Watchlist products only appear if they are #1.</td></tr>';
+      $('copyBtn').disabled = true; $('copyBtn').textContent = 'Copy for team chat';
+      $('log').innerHTML = '<li class="idle">Ready. Press Run all 10.</li>';
+      $('sYes').textContent = '0'; $('sNo').textContent = '0'; $('sChg').textContent = '0';
+      $('pauseBar').classList.remove('on'); $('bar').style.width = '0';
+      $('runBtn').disabled = false; $('runBtn').textContent = 'Run all 10'; $('resetBtn').disabled = true; $('extIcon').classList.remove('busy');
+    }
+
+    function waitForHuman(id){
+      return new Promise(function(res, rej){
+        resumeFn = function(action){ resumeFn = null; $('pauseBar').classList.remove('on'); id === runId ? res(action) : rej('cancelled'); };
+      });
+    }
+
+    async function run(){
+      if (running) return;
+      reset(); var id = runId; running = true;
+      var yes = 0, no = 0, chg = 0;
+      $('runBtn').disabled = true; $('runBtn').textContent = 'Running…'; $('resetBtn').disabled = false; $('extIcon').classList.add('busy');
+      t0 = performance.now();
+      try {
+        for (var i = 0; i < PRODUCTS.length; i++) {
+          var p = PRODUCTS[i], card = $('p' + i);
+          card.className = 'pcard now';
+          var list = $('cards'); list.scrollTop = Math.max(0, card.offsetTop - list.offsetTop - 60);
+          if (p.verify) {
+            showVerify(); log('Verification page on ' + p.name + '. Paused, waiting for a person.', 'warn');
+            $('pauseText').textContent = 'Paused at #' + (i + 1) + ': verification page'; $('pauseBar').classList.add('on'); $('extIcon').classList.remove('busy');
+            var action = await waitForHuman(id);
+            $('extIcon').classList.add('busy');
+            if (action === 'skip') {
+              card.className = 'pcard changed'; card.appendChild(el('div', 'flag', 'Skipped: check by hand'));
+              results.push({ p: p, v: 'Not yet checked', skipped: true }); log(p.name + ' skipped, marked for a manual check.', 'warn');
+              $('bar').style.width = ((i + 1) / PRODUCTS.length * 100) + '%'; continue;
+            }
+            log('Cleared. Re-checking the same product.', 'info');
+          }
+          showPage(p); await sleep(550, id);
+          var hl = $('hl'); if (hl) hl.classList.add('reading'); await sleep(500, id);
+          var v = verdict(p), changed = (v === 'Yes') !== (p.last === 'Yes');
+          var lineEl = card.querySelector('.line'); lineEl.textContent = 'Today: ' + v + '   ·   last: ' + p.last;
+          if (v === 'Yes') yes++; else no++;
+          card.className = 'pcard ' + (changed ? 'changed' : (v === 'Yes' ? 'yes' : 'no'));
+          if (changed) {
+            chg++;
+            card.appendChild(el('div', 'flag', v === 'Yes' ? 'Gained #1 since last check' : 'Lost #1 since last check'));
+            log(p.name + ': ' + v + ' (changed since last check)', 'warn');
+          } else log(p.name + ': ' + v + (p.volatile ? ' (volatile product, no change)' : ''), v === 'Yes' ? 'ok' : null);
+          results.push({ p: p, v: v });
+          $('sYes').textContent = String(yes); $('sNo').textContent = String(no); $('sChg').textContent = String(chg);
+          $('bar').style.width = ((i + 1) / PRODUCTS.length * 100) + '%';
+          await sleep(250, id);
+        }
+        buildReport();
+        $('page').innerHTML = '<div class="page-empty">Run finished. The tab closes and the report is ready.</div>'; $('url').textContent = 'product-page.example';
+        log('Done in ' + ((performance.now() - t0) / 1000).toFixed(1) + 's. Report ready, nothing posted.', 'ok');
+        $('runBtn').disabled = false; $('runBtn').textContent = 'Run again'; $('extIcon').classList.remove('busy'); running = false; $('copyBtn').disabled = false;
+      } catch (e) { /* reset during run */ }
+    }
+
+    var reportRows = [];
+    function buildReport(){
+      reportRows = results.filter(function(r){ return !r.p.watch || r.v === 'Yes'; });
+      var left = results.filter(function(r){ return r.p.watch && r.v !== 'Yes'; });
+      var tb = $('report'); tb.innerHTML = '';
+      reportRows.forEach(function(r){
+        var tr = el('tr'); tr.appendChild(el('td', null, r.p.brand)); tr.appendChild(el('td', null, r.p.name));
+        var td = el('td'); if (r.skipped) { td.appendChild(el('span', 'pill s-review', r.v)); } else td.textContent = r.v; tr.appendChild(td);
+        tb.appendChild(tr);
+      });
+      left.forEach(function(r){ log(r.p.name + ' is on the watchlist and not #1, so it is left out of the report.'); });
+    }
+    $('copyBtn').addEventListener('click', function(){
+      var text = "Hi Team, Here's today's BSR check for the tracked products. (SAMPLE DATA)\n\nBrand\tProduct\tBSR Badge Showing?\n" + reportRows.map(function(r){ return [r.p.brand, r.p.name, r.v].join('\t'); }).join('\n');
+      var btn = this;
+      function done(ok){ btn.textContent = ok ? 'Copied (sample)' : 'Copy not allowed here'; setTimeout(function(){ btn.textContent = 'Copy for team chat'; }, 1800); }
+      try { navigator.clipboard.writeText(text).then(function(){ done(true); }, function(){ done(false); }); } catch (e) { done(false); }
+    });
+
+    $('resumeBtn').addEventListener('click', function(){ if (resumeFn) resumeFn('resume'); });
+    $('skipBtn').addEventListener('click', function(){ if (resumeFn) resumeFn('skip'); });
+    $('runBtn').addEventListener('click', run);
+    $('resetBtn').addEventListener('click', reset);
+    reset();
+  </script>
+</body>
+</html>

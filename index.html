@@ -1490,32 +1490,65 @@
           </div>
         </div>
 
-        <!-- 3. Account Health & BSR Monitor -->
+        <!-- 3. Account Health Monitor -->
         <div class="work-item" data-category="automation">
           <div>
             <div class="work-top-row">
               <span class="eyebrow-tag">Automation & Marketplaces</span>
-              <span class="pill-badge">Seller Central Suite</span>
+              <span class="pill-badge">v0.6.3 · 47 versions</span>
             </div>
-            <h3 class="work-title">Amazon Seller Central Extension Suite</h3>
-            <p class="work-sub">Real-Time Account Health & BSR Tracking Panel</p>
+            <h3 class="work-title">Account Health Monitor</h3>
+            <p class="work-sub">Daily Account Health, Notification & Support Case Checks</p>
             <p class="work-desc">
-              Built a real-time DOM injection tool that embeds directly into Amazon Seller Central (US/CA). Surfaces live account health metrics, policy compliance warnings, and open support tickets with pre-configured escalation templates, paired with an automated Best Seller Rank (BSR) tracker.
+              Built a browser extension that runs the daily Seller Central monitoring for 15 brands across the US and Canada. It switches brand and country, reads Account Health, Performance Notifications and US support cases, skips anything already reported, then drafts the Brand Manager emails and the team tracker. A person reviews and sends everything.
             </p>
 
             <div class="impact-callout">
-              <p>Key Impact: Proactive compliance resolution before account metrics trigger warnings; eliminated manual rank checks.</p>
+              <p>Key Impact: About 30 brand and country switches per round replaced by one click; a log of past reports stops the same item being sent twice.</p>
             </div>
 
             <div class="tags-row">
-              <span class="code-tag">Chrome Extensions</span>
-              <span class="code-tag">DOM Injection</span>
+              <span class="code-tag">Browser Extension</span>
+              <span class="code-tag">JavaScript</span>
               <span class="code-tag">Seller Central</span>
-              <span class="code-tag">Multi-Brand SOP</span>
+              <span class="code-tag">Email Drafting</span>
+              <span class="code-tag">SOP</span>
             </div>
           </div>
 
           <div class="work-footer-links">
+            <a href="account-health-demo/" class="link-chip">Try the interactive demo →</a>
+            <span class="link-chip">Internal Tooling (Growve)</span>
+          </div>
+        </div>
+
+        <!-- 3b. BSR Monitoring -->
+        <div class="work-item" data-category="automation">
+          <div>
+            <div class="work-top-row">
+              <span class="eyebrow-tag">Automation & Marketplaces</span>
+              <span class="pill-badge">v0.2.7 · 20 products</span>
+            </div>
+            <h3 class="work-title">BSR Monitoring</h3>
+            <p class="work-sub">Daily Best Sellers Rank Check Across 12 Brands</p>
+            <p class="work-desc">
+              Built a browser extension that checks whether 20 tracked products still hold #1 in their expected Best Sellers Rank category. It opens each product in turn, reads the rank line, records Yes or the actual rank, flags any change since the last check, and builds the team report. If a verification page appears, it pauses and waits for a person.
+            </p>
+
+            <div class="impact-callout">
+              <p>Key Impact: Replaced a 7-step manual routine per product (about 140 steps a day) with one run; lost #1 spots are flagged automatically.</p>
+            </div>
+
+            <div class="tags-row">
+              <span class="code-tag">Browser Extension</span>
+              <span class="code-tag">JavaScript</span>
+              <span class="code-tag">Rule Engine</span>
+              <span class="code-tag">Change History</span>
+            </div>
+          </div>
+
+          <div class="work-footer-links">
+            <a href="bsr-demo/" class="link-chip">Try the interactive demo →</a>
             <span class="link-chip">Internal Tooling (Growve)</span>
           </div>
         </div>
