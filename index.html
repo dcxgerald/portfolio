@@ -1238,6 +1238,40 @@
     @media (max-width: 600px) { .tiktok-grid figcaption { font-size: 11px; } }
     .client-reel { grid-template-columns: minmax(0, 260px) !important; }
     .client-reel .reel-box:nth-child(3) { grid-column: auto; }
+    /* Profile card: Loom intro video */
+    .profile-video { display: flex; flex-direction: column; gap: 8px; }
+    .loom-embed { position: relative; width: 100%; aspect-ratio: 4 / 3; border-radius: var(--radius-sm); overflow: hidden; border: 1px solid var(--border-subtle); background: var(--bg-subtle); }
+    .loom-embed iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+    .profile-video-cap { font-size: 12px; color: var(--ink-muted); text-align: center; }
+    .profile-video-cap a { color: var(--accent-navy); font-weight: 600; text-decoration: none; }
+    .profile-video-cap a:hover { text-decoration: underline; }
+
+    /* ---- Print / Save as PDF: output only the CV ---- */
+    @media print {
+      @page { size: A4; margin: 12mm 14mm; }
+      :root, :root[data-theme="light"], :root[data-theme="dark"] {
+        --ink-primary: #111111 !important; --ink-secondary: #2E2E2E !important; --ink-muted: #555555 !important;
+        --border-subtle: #CFCFCF !important; --bg-surface: #FFFFFF !important; --bg: #FFFFFF !important; --bg-subtle: #FFFFFF !important;
+        color-scheme: light;
+      }
+      html, body { background: #FFFFFF !important; color: #111111 !important; }
+      body > *:not(#resume-modal) { display: none !important; }
+      #resume-modal { display: block !important; position: static !important; background: none !important; backdrop-filter: none !important; -webkit-backdrop-filter: none !important; padding: 0 !important; }
+      #resume-modal .modal-window { max-width: none !important; width: auto !important; max-height: none !important; overflow: visible !important; padding: 0 !important; box-shadow: none !important; border-radius: 0 !important; background: #FFFFFF !important; }
+      #resume-modal .modal-close-btn, #resume-modal .cv-print-row { display: none !important; }
+      #resume-modal h2, #resume-modal h3 { break-after: avoid; }
+      #resume-modal li, #resume-modal .cv-job { break-inside: avoid; }
+      #resume-modal a { color: #111111 !important; text-decoration: none !important; }
+      /* Compact spacing so the CV fits on one A4 page */
+      #resume-modal .modal-window > div { margin-bottom: 12px !important; }
+      #resume-modal .modal-window > div:first-of-type { padding-bottom: 10px !important; margin-bottom: 14px !important; }
+      #resume-modal h2 { font-size: 26px !important; }
+      #resume-modal h3 { font-size: 16px !important; margin-bottom: 7px !important; padding-bottom: 4px !important; }
+      #resume-modal p, #resume-modal li { font-size: 11.5px !important; line-height: 1.42 !important; }
+      #resume-modal .cv-job { margin-bottom: 9px !important; }
+      #resume-modal .cv-job > div:first-child { font-size: 12.5px !important; }
+      #resume-modal ul { margin-top: 3px !important; }
+    }
     :root[data-theme="light"] .contact-action-btn.featured { background: var(--accent-bronze-dark); color: #FFFFFF; }
     body, header, .work-item, .profile-card, .contact-card { transition: background-color .25s ease, color .25s ease, border-color .25s ease; }
     /* video captions always sit on a dark gradient */
@@ -1350,17 +1384,11 @@
             </ul>
           </div>
 
-          <div class="profile-actions">
-            <button class="btn btn-dark" onclick="toggleModal('resume-modal')">
-              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line></svg>
-              View Full CV / Credentials
-            </button>
-            <a href="https://linkedin.com/in/contactgeralddelacruz" target="_blank" rel="noopener" class="btn btn-ghost">
-              LinkedIn Profile ↗
-            </a>
-            <a href="https://www.onlinejobs.ph/jobseekers/info/3981136" target="_blank" rel="noopener" class="btn btn-ghost">
-              OnlineJobs.ph Profile ↗
-            </a>
+          <div class="profile-video">
+            <div class="loom-embed">
+              <iframe src="https://www.loom.com/embed/84b9a4bc664f441db958a1c93b82d1fd?hide_owner=true&amp;hide_share=true&amp;hide_title=true&amp;hideEmbedTopBar=true" title="Video: Gerald Roi introduces himself (6 min)" loading="lazy" allow="fullscreen" allowfullscreen></iframe>
+            </div>
+            <p class="profile-video-cap">Video intro · 6 min · <a href="https://www.loom.com/share/84b9a4bc664f441db958a1c93b82d1fd" target="_blank" rel="noopener">Open in Loom ↗</a></p>
           </div>
         </div>
 
@@ -2122,7 +2150,7 @@
       <div style="margin-bottom: 24px;">
         <h3 style="font-family: var(--font-serif); font-size: 20px; color: var(--ink-primary); border-bottom: 1px solid var(--border-subtle); padding-bottom: 6px; margin-bottom: 12px;">Professional Experience</h3>
         
-        <div style="margin-bottom: 16px;">
+        <div class="cv-job" style="margin-bottom: 16px;">
           <div style="display: flex; justify-content: space-between; font-size: 14px; font-weight: 700; color: var(--ink-primary);">
             <span>Growve — Marketplace Specialist</span>
             <span style="font-family: var(--font-mono); font-size: 12px; font-weight: normal; color: var(--ink-muted);">August 2026 – Present</span>
@@ -2134,7 +2162,7 @@
           </ul>
         </div>
 
-        <div style="margin-bottom: 16px;">
+        <div class="cv-job" style="margin-bottom: 16px;">
           <div style="display: flex; justify-content: space-between; font-size: 14px; font-weight: 700; color: var(--ink-primary);">
             <span>Ozzca International — Marketplace Specialist</span>
             <span style="font-family: var(--font-mono); font-size: 12px; font-weight: normal; color: var(--ink-muted);">Nov 2025 – Apr 2026</span>
@@ -2145,7 +2173,7 @@
           </ul>
         </div>
 
-        <div style="margin-bottom: 16px;">
+        <div class="cv-job" style="margin-bottom: 16px;">
           <div style="display: flex; justify-content: space-between; font-size: 14px; font-weight: 700; color: var(--ink-primary);">
             <span>Secure Parking — Quality Analyst</span>
             <span style="font-family: var(--font-mono); font-size: 12px; font-weight: normal; color: var(--ink-muted);">Apr 2022 – Oct 2025</span>
@@ -2176,7 +2204,7 @@
         </ul>
       </div>
 
-      <div style="margin-top: 30px; text-align: right;">
+      <div class="cv-print-row" style="margin-top: 30px; text-align: right;">
         <button class="btn btn-dark" onclick="window.print()">Print / Save as PDF</button>
       </div>
     </div>
@@ -2214,6 +2242,13 @@
         toggleModal(e.target.id);
       }
     }
+
+    // Print / Save as PDF: only the CV prints (see @media print), saved as "Gerald Roi _ Resume.pdf"
+    (function(){
+      var pageTitle = document.title;
+      window.addEventListener('beforeprint', function(){ document.title = 'Gerald Roi | Resume'; });
+      window.addEventListener('afterprint', function(){ document.title = pageTitle; });
+    })();
 
     // Escape Key to Close
     document.addEventListener('keydown', (e) => {
