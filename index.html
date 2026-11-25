@@ -1234,6 +1234,13 @@
     .video-placeholder:hover { transform: none; border-color: var(--border-strong); }
     .video-placeholder .ph-title { font-family: var(--font-mono); font-size: 11px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--ink-secondary); }
     .video-placeholder .ph-note { font-size: 12px; line-height: 1.35; color: var(--ink-muted); }
+    .design-grid { display: grid; grid-template-columns: 1fr 1.78fr; gap: 16px; margin-top: 20px; max-width: 900px; align-items: start; }
+    .design-shot { margin: 0; min-width: 0; }
+    .design-shot img { display: block; width: 100%; height: auto; border-radius: 8px; border: 1px solid var(--border-subtle); }
+    .design-shot figcaption { margin-top: 8px; font-size: 12.5px; color: var(--ink-secondary); }
+    .design-shot--banner, .design-shot--email { grid-column: 1 / -1; }
+    .design-shot--email { max-width: 600px; }
+    @media (max-width: 600px) { .design-grid { grid-template-columns: 1fr; } }
     .tiktok-grid figcaption { font-size: 12.5px; line-height: 1.35; color: var(--ink-secondary); }
     @media (max-width: 600px) { .tiktok-grid figcaption { font-size: 11px; } }
     .client-reel { grid-template-columns: minmax(0, 260px) !important; }
@@ -1561,7 +1568,7 @@
 
             <!-- Short-form edits (recut to 40s) -->
             <h4 class="sub-heading">Short-Form Edits</h4>
-            <p class="compare-note">My TikTok edits, recut to 40 seconds: story trimming, B-roll, AI voiceover and designed titles.</p>
+            <p class="compare-note">Edits I made for TikTok, including a 40-second story cut and a trailer recut with B-roll and AI voiceover.</p>
             <div class="reels-grid tiktok-grid">
               <figure class="compare-item">
                 <div class="video-box">
@@ -1581,11 +1588,11 @@
               </figure>
               <figure class="compare-item">
                 <div class="video-box">
-                  <video controls preload="none" playsinline poster="videos/posters/meme-edit.jpg" aria-label="Meme edit: 40-second version with end card">
+                  <video controls preload="none" playsinline poster="videos/posters/meme-edit.jpg" aria-label="Meme edit">
                     <source src="videos/meme-edit.mp4" type="video/mp4">
                   </video>
                 </div>
-                <figcaption>Meme edit · 36s → 40s with end card</figcaption>
+                <figcaption>Meme edit · original cut</figcaption>
               </figure>
             </div>
 
@@ -1657,6 +1664,42 @@
             </div>
           </div>
 
+        </div>
+
+        <!-- Canva design: S-kin Studio concept set -->
+        <div class="work-item work-item--wide" data-category="video">
+          <div>
+            <div class="work-top-row">
+              <span class="eyebrow-tag">Graphic Design</span>
+              <span class="pill-badge">Spec Work</span>
+            </div>
+            <h3 class="work-title">S-kin Studio Jewelry: Campaign Concepts</h3>
+            <p class="work-sub">Canva Design for Web, Social &amp; Email</p>
+            <p class="work-desc">Four concept pieces for a Melbourne jewellery brand. Unofficial spec work, AI-assisted in Canva; not commissioned by S-kin Studio.</p>
+            <div class="design-grid">
+              <figure class="design-shot design-shot--banner">
+                <a href="images/s-kin/banner.jpg" target="_blank" rel="noopener"><img src="images/s-kin/banner.jpg" width="1584" height="396" loading="lazy" alt="Mid-Autumn Collection website banner concept"></a>
+                <figcaption>Website banner</figcaption>
+              </figure>
+              <figure class="design-shot design-shot--instagram">
+                <a href="images/s-kin/instagram.jpg" target="_blank" rel="noopener"><img src="images/s-kin/instagram.jpg" width="1080" height="1080" loading="lazy" alt="Meet Tako Instagram post concept"></a>
+                <figcaption>Instagram post</figcaption>
+              </figure>
+              <figure class="design-shot design-shot--product-page">
+                <a href="images/s-kin/product-page.jpg" target="_blank" rel="noopener"><img src="images/s-kin/product-page.jpg" width="1366" height="768" loading="lazy" alt="Narutomaki Ring product page concept"></a>
+                <figcaption>Shopify product page</figcaption>
+              </figure>
+              <figure class="design-shot design-shot--email">
+                <a href="images/s-kin/email.jpg" target="_blank" rel="noopener"><img src="images/s-kin/email.jpg" width="600" height="200" loading="lazy" alt="Black Friday email header concept"></a>
+                <figcaption>Email header</figcaption>
+              </figure>
+            </div>
+            <div class="tags-row" style="margin-top: 24px;">
+              <span class="code-tag">Canva</span>
+              <span class="code-tag">Shopify</span>
+              <span class="code-tag">Email Design</span>
+            </div>
+          </div>
         </div>
 
         <!-- 2. RGenie Assistant Extension -->
