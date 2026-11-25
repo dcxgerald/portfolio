@@ -1255,6 +1255,10 @@
     .profile-video-cap a { color: var(--accent-navy); font-weight: 600; text-decoration: none; }
     .profile-video-cap a:hover { text-decoration: underline; }
 
+    .cv-btn { font: 600 14px/1.6 var(--font-sans); padding: 12px 20px; border: 1px solid var(--border-strong); cursor: pointer; }
+    .cv-btn:hover, .cv-btn:focus-visible { background: #D2B48C; border-color: #D2B48C; color: #1A1A1A; }
+    .cv-btn:focus-visible { outline: 2px solid var(--accent-bronze); outline-offset: 3px; }
+
     /* ---- Print / Save as PDF: output only the CV ---- */
     @media print {
       @page { size: A4; margin: 12mm 14mm; }
@@ -2219,8 +2223,8 @@
           Manila, Philippines (PHT, UTC+8) · Email: contactgeralddelacruz@gmail.com · LinkedIn: linkedin.com/in/contactgeralddelacruz · OLJ: jobseekers/info/3981136
         </p>
         <div class="cv-print-row" style="display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-top:14px">
-        <a class="btn btn-dark" href="https://drive.google.com/uc?export=download&amp;id=1x3eJOO5ahwvC8jigKSYQAQcgoS1c7jTT" style="text-decoration:none">Download resume (PDF)</a>
-        <a class="link-chip" href="https://drive.google.com/file/d/1x3eJOO5ahwvC8jigKSYQAQcgoS1c7jTT/view?usp=sharing" target="_blank" rel="noopener" style="font-size:14px;padding:12px 20px">View on Google Drive ↗</a>
+        <a class="link-chip cv-btn" href="https://drive.google.com/uc?export=download&amp;id=1x3eJOO5ahwvC8jigKSYQAQcgoS1c7jTT">Download resume (PDF)</a>
+        <a class="link-chip cv-btn" href="https://drive.google.com/file/d/1x3eJOO5ahwvC8jigKSYQAQcgoS1c7jTT/view?usp=sharing" target="_blank" rel="noopener">View on Google Drive ↗</a>
         </div>
       </div>
 
@@ -2289,7 +2293,7 @@
       </div>
 
       <div class="cv-print-row" style="display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:flex-end;margin-top:30px">
-        <button class="btn btn-dark" onclick="window.print()">Print / Save as PDF</button>
+        <button class="link-chip cv-btn" onclick="window.print()">Print / Save as PDF</button>
       </div>
     </div>
   </div>
