@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Video Editing | Gerald Roi</title>
+  <meta name="description" content="Short-form edits, before-and-after spec ads and reels.">
+  <meta property="og:title" content="Video Editing | Gerald Roi">
+  <meta property="og:description" content="Short-form edits, before-and-after spec ads and reels.">
+  <meta property="og:url" content="https://dcxgerald.github.io/portfolio/video-editing/">
+  <meta property="og:image" content="https://dcxgerald.github.io/portfolio/og-image.png">
+  <link rel="canonical" href="https://dcxgerald.github.io/portfolio/video-editing/">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%230A0A0A'/%3E%3Ctext x='32' y='42' text-anchor='middle' font-family='Georgia,serif' font-size='28' font-weight='700' fill='%23C99A4B'%3EGR%3C/text%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=JetBrains+Mono:wght@400;500;600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root { --bg:#0A0A0A; --line:#2A2A2A; --ink:#F0EDE8; --soft:#C8C4BE; --accent:#C99A4B; color-scheme:dark; }
+    :root[data-theme="light"] { --bg:#F6F3EE; --line:#DDD7CD; --ink:#1A1A1A; --soft:#4A4642; --accent:#7A5518; color-scheme:light; }
+    * { box-sizing:border-box; }
+    body { margin:0; background:var(--bg); color:var(--soft); font:16px/1.6 'Plus Jakarta Sans',system-ui,sans-serif; }
+    .wrap { max-width:1120px; margin:0 auto; padding:0 20px 72px; }
+    nav { display:flex; flex-wrap:wrap; gap:8px 22px; align-items:center; padding:22px 0; border-bottom:1px solid var(--line); font-size:14px; }
+    nav .brand { margin-right:auto; font:700 22px 'Cormorant Garamond',Georgia,serif; color:var(--ink); }
+    a { color:var(--soft); text-decoration:none; } a:hover, nav a[aria-current] { color:var(--accent); }
+    a:focus-visible { outline:2px solid var(--accent); outline-offset:3px; }
+    h1 { margin:48px 0 6px; font:700 46px/1.1 'Cormorant Garamond',Georgia,serif; color:var(--ink); }
+    h2 { margin:52px 0 4px; font:700 28px/1.2 'Cormorant Garamond',Georgia,serif; color:var(--ink); }
+    p { margin:0 0 18px; max-width:65ch; }
+    .grid { display:grid; gap:20px; align-items:start; }
+    .g3 { grid-template-columns:repeat(3,minmax(0,1fr)); max-width:820px; } .g4 { grid-template-columns:repeat(4,minmax(0,1fr)); }
+    .g2 { grid-template-columns:repeat(2,minmax(0,1fr)); } .full { grid-column:1/-1; }
+    figure { margin:0; } figcaption { margin-top:8px; font-size:14px; }
+    img, video { display:block; width:100%; height:auto; border:1px solid var(--line); border-radius:8px; background:#000; }
+    video { aspect-ratio:9/16; }
+    ul { margin:0; padding:0; list-style:none; } li { padding:10px 0; border-bottom:1px solid var(--line); }
+    @media (max-width:640px) { .g3,.g2 { grid-template-columns:1fr; } .g4 { grid-template-columns:1fr 1fr; gap:12px; } h1 { font-size:36px; } }
+  </style>
+  <script>try{document.documentElement.setAttribute('data-theme',localStorage.getItem('theme')||'dark')}catch(e){}</script>
+</head>
+<body>
+  <div class="wrap">
+    <nav><a class="brand" href="../">Gerald Roi</a><a href="../">Main portfolio</a><a href="../video-editing/" aria-current="page">Videos</a><a href="../artwork/">Artwork</a><a href="../#contact">Contact</a></nav>
+    <main>
+      <h1>Video Editing</h1>
+      <p>Short-form edits, before-and-after spec ads and reels.</p>
+      <h2>Short-form edits</h2>
+      <p>Edits I made for TikTok, recut to 40 seconds.</p>
+      <div class="grid g3">
+        <figure><video controls preload="none" playsinline poster="../videos/posters/mw4-edit.jpg" aria-label="MW4 trailer · 20s → 40s hype edit, AI voiceover"><source src="../videos/mw4-edit.mp4" type="video/mp4"></video><figcaption>MW4 trailer · 20s → 40s hype edit, AI voiceover</figcaption></figure>
+        <figure><video controls preload="none" playsinline poster="../videos/posters/albums-edit.jpg" aria-label="Music explainer · 78s → 40s story cut"><source src="../videos/albums-edit.mp4" type="video/mp4"></video><figcaption>Music explainer · 78s → 40s story cut</figcaption></figure>
+        <figure><video controls preload="none" playsinline poster="../videos/posters/meme-edit.jpg" aria-label="Meme edit · 36s → 40s"><source src="../videos/meme-edit.mp4" type="video/mp4"></video><figcaption>Meme edit · 36s → 40s</figcaption></figure>
+      </div>
+      <h2>Before and after: spec ads</h2>
+      <p>The original footage next to my AI-assisted edit.</p>
+      <div class="grid g4">
+        <figure><video controls preload="none" playsinline poster="../videos/posters/ponds-before.jpg" aria-label="Ponds · original"><source src="../videos/comparison-before.mp4" type="video/mp4"></video><figcaption>Ponds · original</figcaption></figure>
+        <figure><video controls preload="none" playsinline poster="../videos/posters/ponds-after.jpg" aria-label="Ponds · my edit"><source src="../videos/comparison-after.mp4" type="video/mp4"></video><figcaption>Ponds · my edit</figcaption></figure>
+        <figure><video controls preload="none" playsinline poster="../videos/posters/natures-before.jpg" aria-label="Nature's Craft · original"><source src="../videos/natures-before.mp4" type="video/mp4"></video><figcaption>Nature's Craft · original</figcaption></figure>
+        <figure><video controls preload="none" playsinline poster="../videos/posters/natures-after.jpg" aria-label="Nature's Craft · my edit"><source src="../videos/natures-after.mp4" type="video/mp4"></video><figcaption>Nature's Craft · my edit</figcaption></figure>
+      </div>
+      <h2>Reels on Facebook</h2>
+      <ul>
+        <li><a href="https://www.facebook.com/reel/1439412988378396" target="_blank" rel="noopener">The Assumptionist Choir: Rehearsal Dynamics ↗</a></li>
+        <li><a href="https://www.facebook.com/reel/943539251748337" target="_blank" rel="noopener">The Assumptionist Choir: Choral Performance ↗</a></li>
+        <li><a href="https://www.facebook.com/reel/1119203340439293" target="_blank" rel="noopener">The Assumptionist Choir: Event Showcase ↗</a></li>
+        <li><a href="https://www.facebook.com/reel/9722835071153056/" target="_blank" rel="noopener">Music Matrix Event Solutions: Seamless Event Setup (client reel) ↗</a></li>
+      </ul>
+    </main>
+  </div>
+</body>
+</html>
