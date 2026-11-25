@@ -35,12 +35,14 @@
     video { aspect-ratio:9/16; }
     ul { margin:0; padding:0; list-style:none; } li { padding:10px 0; border-bottom:1px solid var(--line); }
     @media (max-width:640px) { .g3,.g2 { grid-template-columns:1fr; } .g4 { grid-template-columns:1fr 1fr; gap:12px; } h1 { font-size:36px; } }
+    nav button { font:inherit; color:var(--soft); background:none; border:1px solid var(--line); border-radius:99px; padding:8px 14px; cursor:pointer; }
+    nav button:hover { color:var(--accent); border-color:var(--accent); } button:focus-visible { outline:2px solid var(--accent); outline-offset:3px; }
   </style>
   <script>try{document.documentElement.setAttribute('data-theme',localStorage.getItem('theme')||'dark')}catch(e){}</script>
 </head>
 <body>
   <div class="wrap">
-    <nav><a class="brand" href="../">Gerald Roi</a><a href="../">Main portfolio</a><a href="../video-editing/" aria-current="page">Videos</a><a href="../artwork/">Artwork</a><a href="../graphic-design/">Graphic Design</a><a href="../#contact">Contact</a></nav>
+    <nav><a class="brand" href="../">Gerald Roi</a><a href="../">Main portfolio</a><a href="../video-editing/" aria-current="page">Videos</a><a href="../artwork/">Artwork</a><a href="../graphic-design/">Graphic Design</a><a href="../#contact">Contact</a><button type="button" id="theme"></button></nav>
     <main>
       <h1>Video Editing</h1>
       <p>Short-form edits, before-and-after spec ads and reels.</p>
@@ -68,5 +70,13 @@
       </ul>
     </main>
   </div>
+  <script>
+    (function(){
+      var r=document.documentElement, b=document.getElementById('theme');
+      function show(){ var light=r.getAttribute('data-theme')==='light'; b.textContent=light?'☾ Dark mode':'☀ Light mode'; }
+      b.addEventListener('click',function(){ var t=r.getAttribute('data-theme')==='light'?'dark':'light'; r.setAttribute('data-theme',t); try{localStorage.setItem('theme',t)}catch(e){} show(); });
+      show();
+    })();
+  </script>
 </body>
 </html>

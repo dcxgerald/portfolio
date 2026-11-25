@@ -37,12 +37,14 @@
     @media (max-width:640px) { .g3,.g2 { grid-template-columns:1fr; } .g4 { grid-template-columns:1fr 1fr; gap:12px; } h1 { font-size:36px; } }
     .g5 { grid-template-columns:repeat(5,minmax(0,1fr)); gap:12px; }
     @media (max-width:640px) { .g5 { display:flex; overflow-x:auto; scroll-snap-type:x mandatory; } .g5 figure { flex:0 0 72%; scroll-snap-align:start; } }
+    nav button { font:inherit; color:var(--soft); background:none; border:1px solid var(--line); border-radius:99px; padding:8px 14px; cursor:pointer; }
+    nav button:hover { color:var(--accent); border-color:var(--accent); } button:focus-visible { outline:2px solid var(--accent); outline-offset:3px; }
   </style>
   <script>try{document.documentElement.setAttribute('data-theme',localStorage.getItem('theme')||'dark')}catch(e){}</script>
 </head>
 <body>
   <div class="wrap">
-    <nav><a class="brand" href="../">Gerald Roi</a><a href="../">Main portfolio</a><a href="../video-editing/">Videos</a><a href="../artwork/">Artwork</a><a href="../graphic-design/" aria-current="page">Graphic Design</a><a href="../#contact">Contact</a></nav>
+    <nav><a class="brand" href="../">Gerald Roi</a><a href="../">Main portfolio</a><a href="../video-editing/">Videos</a><a href="../artwork/">Artwork</a><a href="../graphic-design/" aria-current="page">Graphic Design</a><a href="../#contact">Contact</a><button type="button" id="theme"></button></nav>
     <main>
       <h1>Graphic Design</h1>
       <p>Thumbnails, carousels and posters. Self-initiated concepts, AI-assisted; the brands and events are made up.</p>
@@ -70,5 +72,13 @@
       </div>
     </main>
   </div>
+  <script>
+    (function(){
+      var r=document.documentElement, b=document.getElementById('theme');
+      function show(){ var light=r.getAttribute('data-theme')==='light'; b.textContent=light?'☾ Dark mode':'☀ Light mode'; }
+      b.addEventListener('click',function(){ var t=r.getAttribute('data-theme')==='light'?'dark':'light'; r.setAttribute('data-theme',t); try{localStorage.setItem('theme',t)}catch(e){} show(); });
+      show();
+    })();
+  </script>
 </body>
 </html>
