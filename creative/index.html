@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Video &amp; Design | Gerald Roi</title>
+  <meta name="description" content="Short-form video editing and graphic design by Gerald Roi: reels, TikTok edits, spec ads, thumbnails, carousels and posters.">
+  <meta property="og:title" content="Video &amp; Design | Gerald Roi">
+  <meta property="og:description" content="Short-form video editing and graphic design by Gerald Roi: reels, TikTok edits, spec ads, thumbnails, carousels and posters.">
+  <meta property="og:url" content="https://dcxgerald.github.io/portfolio/creative/">
+  <meta property="og:image" content="https://dcxgerald.github.io/portfolio/og-image.png">
+  <link rel="canonical" href="https://dcxgerald.github.io/portfolio/creative/">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%230A0A0A'/%3E%3Ctext x='32' y='42' text-anchor='middle' font-family='Georgia,serif' font-size='28' font-weight='700' fill='%23C99A4B'%3EGR%3C/text%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=JetBrains+Mono:wght@400;500;600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root { --bg:#0A0A0A; --line:#2A2A2A; --ink:#F0EDE8; --soft:#C8C4BE; --accent:#C99A4B; color-scheme:dark; }
+    :root[data-theme="light"] { --bg:#F6F3EE; --line:#DDD7CD; --ink:#1A1A1A; --soft:#4A4642; --accent:#7A5518; color-scheme:light; }
+    * { box-sizing:border-box; }
+    body { margin:0; background:var(--bg); color:var(--soft); font:16px/1.6 'Plus Jakarta Sans',system-ui,sans-serif; }
+    .wrap { max-width:1120px; margin:0 auto; padding:0 20px 72px; }
+    a { color:var(--soft); text-decoration:none; } a:hover { color:var(--accent); }
+    a:focus-visible { outline:2px solid var(--accent); outline-offset:3px; }
+    h1 { margin:48px 0 6px; font:700 46px/1.1 'Cormorant Garamond',Georgia,serif; color:var(--ink); }
+    h2 { margin:52px 0 4px; font:700 28px/1.2 'Cormorant Garamond',Georgia,serif; color:var(--ink); }
+    p { margin:0 0 18px; max-width:65ch; }
+    .grid { display:grid; gap:20px; align-items:start; }
+    .g3 { grid-template-columns:repeat(3,minmax(0,1fr)); max-width:820px; } .g4 { grid-template-columns:repeat(4,minmax(0,1fr)); }
+    .g2 { grid-template-columns:repeat(2,minmax(0,1fr)); } .full { grid-column:1/-1; }
+    figure { margin:0; } figcaption { margin-top:8px; font-size:14px; }
+    img, video { display:block; width:100%; height:auto; border:1px solid var(--line); border-radius:8px; background:#000; }
+    video { aspect-ratio:9/16; }
+    ul { margin:0; padding:0; list-style:none; } li { padding:10px 0; border-bottom:1px solid var(--line); }
+    @media (max-width:640px) { .g3,.g2 { grid-template-columns:1fr; } .g4 { grid-template-columns:1fr 1fr; gap:12px; } h1 { font-size:36px; } }
+    .g5 { grid-template-columns:repeat(5,minmax(0,1fr)); gap:12px; }
+    @media (max-width:640px) { .g5 { display:flex; overflow-x:auto; scroll-snap-type:x mandatory; } .g5 figure { flex:0 0 72%; scroll-snap-align:start; } }
+    header { position:sticky; top:0; z-index:10; background:var(--bg); border-bottom:1px solid var(--line); }
+    .nav-inner { max-width:1140px; margin:0 auto; padding:0 28px; height:74px; display:flex; align-items:center; justify-content:space-between; }
+    .nav-links { display:flex; gap:20px; width:33%; margin:0; padding:0; list-style:none; } .nav-links.right { justify-content:flex-end; }
+    .nav-links li { padding:0; border:0; }
+    .nav-links a, .nav-theme { font:600 12.5px/1.6 'Plus Jakarta Sans',system-ui,sans-serif; letter-spacing:.12em; text-transform:uppercase; color:var(--soft); white-space:nowrap; }
+    .nav-links a { padding:10px 2px; } .nav-links a:hover, .nav-theme:hover { color:var(--ink); } .nav-links a[aria-current] { color:var(--accent); }
+    .nav-theme { background:none; border:0; padding:0 2px; cursor:pointer; } .nav-theme:focus-visible { outline:2px solid var(--accent); outline-offset:2px; }
+    .nav-theme::before { content:"☀ Light"; } :root[data-theme="light"] .nav-theme::before { content:"☾ Dark"; }
+    .brand-mark { width:34%; text-align:center; font:700 26px/1.6 'Cormorant Garamond',Georgia,serif; letter-spacing:.14em; text-transform:uppercase; color:var(--ink); }
+    @media (max-width:1100px) { .nav-wide { display:none; } }
+    @media (max-width:900px) { .nav-inner { flex-wrap:wrap; justify-content:center; height:auto; padding:10px 20px 4px; column-gap:6px; } .brand-mark { width:100%; order:-1; font-size:22px; } .nav-links { display:contents; } .nav-links a, .nav-theme { display:inline-block; font-size:11.5px; letter-spacing:.08em; padding:10px 7px; } }
+    @media (max-width:420px) { .nav-inner { position:relative; column-gap:0; } .nav-links a { font-size:11px; letter-spacing:.04em; } .nav-links li:has(.nav-theme) { position:absolute; right:14px; top:4px; } .nav-theme { min-width:40px; min-height:40px; padding:8px; } .nav-theme::before { content:"☀"; font-size:15px; letter-spacing:0; } :root[data-theme="light"] .nav-theme::before { content:"☾"; } }
+    .lead { font-size:18px; max-width:60ch; }
+    .chips { display:flex; flex-wrap:wrap; gap:10px; margin:22px 0 8px; }
+    .chip { display:inline-block; padding:11px 18px; border:1px solid var(--line); border-radius:999px; color:var(--ink); font-weight:600; font-size:14px; }
+    .chip:hover { border-color:var(--accent); color:var(--accent); }
+    .proof { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:12px; margin:28px 0 0; padding:0; }
+    .proof li { border:1px solid var(--line); border-radius:10px; padding:14px 16px; }
+    .proof strong { display:block; font:700 26px/1.1 'Cormorant Garamond',Georgia,serif; color:var(--ink); }
+    .proof span { font-size:13.5px; }
+    .more { display:inline-block; margin-top:14px; color:var(--accent); font-weight:600; }
+    .contact { margin-top:64px; padding-top:28px; border-top:1px solid var(--line); }
+    .contact .chips { margin-top:12px; }
+    .small { font-size:13.5px; }
+    @media (max-width:640px) { .proof { grid-template-columns:1fr; } }
+  </style>
+  <script>try{document.documentElement.setAttribute('data-theme',localStorage.getItem('theme')||'dark')}catch(e){}</script>
+</head>
+<body>
+  <header>
+    <nav class="nav-inner">
+      <ul class="nav-links left">
+        <li class="nav-wide"><a href="../creative/" aria-current="page">Overview</a></li>
+        <li><a href="../video-editing/">Videos</a></li>
+        <li><a href="../graphic-design/">Design</a></li>
+      </ul>
+      <a class="brand-mark" href="../creative/">Gerald Roi</a>
+      <ul class="nav-links right">
+        <li class="nav-wide"><a href="../artwork/">Presentations</a></li>
+        <li><a href="../creative/#contact">Contact</a></li>
+        <li><button type="button" class="nav-theme" id="theme" aria-label="Switch between dark and light mode"></button></li>
+      </ul>
+    </nav>
+  </header>
+  <div class="wrap">
+    <main>
+      <h1>Short-form Video &amp; Graphic Design</h1>
+      <p class="lead">I edit short-form videos for social media and design thumbnails, carousels and posters, using Premiere Pro, CapCut, Photoshop and Canva.</p>
+      <div class="chips">
+        <a class="chip" href="#video">Video edits ↓</a>
+        <a class="chip" href="#design">Graphic design ↓</a>
+        <a class="chip" href="#contact">Contact ↓</a>
+      </div>
+      <ul class="proof">
+        <li><strong>13K+</strong><span>followers on the choir page I edit reels for</span></li>
+        <li><strong>1.6K+</strong><span>views on a client event reel</span></li>
+        <li><strong>20+</strong><span>short-form edits, spec ads and team videos</span></li>
+      </ul>
+
+      <h2 id="video">Video edits</h2>
+      <p>A trailer recut, a story cut, and a spec ad shown before and after my edit.</p>
+      <div class="grid g4">
+        <figure><video controls preload="none" playsinline poster="../videos/posters/mw4-edit.jpg" aria-label="MW4 trailer · 20s → 40s hype edit, AI voiceover"><source src="../videos/mw4-edit.mp4" type="video/mp4"></video><figcaption>MW4 trailer · 20s → 40s hype edit, AI voiceover</figcaption></figure>
+        <figure><video controls preload="none" playsinline poster="../videos/posters/albums-edit.jpg" aria-label="Music explainer · 78s → 40s story cut"><source src="../videos/albums-edit.mp4" type="video/mp4"></video><figcaption>Music explainer · 78s → 40s story cut</figcaption></figure>
+        <figure><video controls preload="none" playsinline poster="../videos/posters/ponds-before.jpg" aria-label="Ponds · original"><source src="../videos/comparison-before.mp4" type="video/mp4"></video><figcaption>Ponds · original</figcaption></figure>
+        <figure><video controls preload="none" playsinline poster="../videos/posters/ponds-after.jpg" aria-label="Ponds · my edit"><source src="../videos/comparison-after.mp4" type="video/mp4"></video><figcaption>Ponds · my edit</figcaption></figure>
+      </div>
+      <a class="more" href="../video-editing/">See all videos, team edits and reels →</a>
+
+      <h2 id="design">Graphic design</h2>
+      <p>Self-initiated concepts, AI-assisted; the brands and events are made up.</p>
+      <div class="grid g2">
+        <figure><a href="../images/graphic-design/thumbnail-manila-5am.jpg" target="_blank" rel="noopener"><img src="../images/graphic-design/thumbnail-manila-5am.jpg" width="1280" height="720" loading="lazy" alt="Manila at 5 AM · travel vlog thumbnail"></a><figcaption>Manila at 5 AM · travel vlog thumbnail</figcaption></figure>
+        <figure><a href="../images/graphic-design/thumbnail-sleep-reset.jpg" target="_blank" rel="noopener"><img src="../images/graphic-design/thumbnail-sleep-reset.jpg" width="1280" height="720" loading="lazy" alt="Sleep Reset · challenge video thumbnail"></a><figcaption>Sleep Reset · challenge video thumbnail</figcaption></figure>
+      </div>
+      <div class="grid g3" style="max-width:none;margin-top:20px">
+        <figure><a href="../images/graphic-design/carousel-study-1.jpg" target="_blank" rel="noopener"><img src="../images/graphic-design/carousel-study-1.jpg" width="1080" height="1350" loading="lazy" alt="Instagram carousel · slide 1 of 5"></a><figcaption>Instagram carousel · slide 1 of 5</figcaption></figure>
+        <figure><a href="../images/graphic-design/poster-mango-hapon.jpg" target="_blank" rel="noopener"><img src="../images/graphic-design/poster-mango-hapon.jpg" width="1080" height="1350" loading="lazy" alt="Mango All Hapon · juice bar poster"></a><figcaption>Mango All Hapon · juice bar poster</figcaption></figure>
+        <figure><a href="../images/graphic-design/poster-listening-night.jpg" target="_blank" rel="noopener"><img src="../images/graphic-design/poster-listening-night.jpg" width="1080" height="1350" loading="lazy" alt="Listening Night · event poster"></a><figcaption>Listening Night · event poster</figcaption></figure>
+      </div>
+      <a class="more" href="../graphic-design/">See all graphic design →</a>
+
+      <h2 id="presentations">Brand &amp; presentation design</h2>
+      <p>Canva campaign concepts (unofficial spec work for S-kin Studio) and PowerPoint decks for class reports.</p>
+      <div class="grid g3" style="max-width:none">
+        <figure><a href="../images/s-kin/instagram.jpg" target="_blank" rel="noopener"><img src="../images/s-kin/instagram.jpg" width="1080" height="1080" loading="lazy" alt="S-kin Studio · Instagram post concept"></a><figcaption>S-kin Studio · Instagram post concept</figcaption></figure>
+        <figure><a href="../images/artwork/consciousness-poster.jpg" target="_blank" rel="noopener"><img src="../images/artwork/consciousness-poster.jpg" width="1640" height="1868" loading="lazy" alt="Consciousness · Netflix-style deck"></a><figcaption>Consciousness · Netflix-style deck</figcaption></figure>
+        <figure><a href="../images/artwork/communication-poster.jpg" target="_blank" rel="noopener"><img src="../images/artwork/communication-poster.jpg" width="1640" height="1868" loading="lazy" alt="Communication · game-menu deck"></a><figcaption>Communication · game-menu deck</figcaption></figure>
+      </div>
+      <a class="more" href="../artwork/">See all presentations and brand concepts →</a>
+
+      <section class="contact" id="contact">
+        <h2 style="margin-top:0">Let's work together</h2>
+        <p>Need reels, short-form edits or social graphics? Send me a message.</p>
+        <div class="chips">
+          <a class="chip" href="mailto:contactgeralddelacruz@gmail.com">contactgeralddelacruz@gmail.com</a>
+          <a class="chip" href="https://linkedin.com/in/contactgeralddelacruz" target="_blank" rel="noopener">LinkedIn ↗</a>
+          <a class="chip" href="https://www.onlinejobs.ph/jobseekers/info/3981136" target="_blank" rel="noopener">OnlineJobs.ph ↗</a>
+          <a class="chip" href="https://drive.google.com/file/d/1x3eJOO5ahwvC8jigKSYQAQcgoS1c7jTT/view?usp=sharing" target="_blank" rel="noopener">Resume (Google Drive) ↗</a>
+        </div>
+        <p class="small">Based in Manila, Philippines (PHT, UTC+8). I also build e-commerce automation: <a href="../" style="color:var(--accent)">see that portfolio →</a></p>
+      </section>
+    </main>
+  </div>
+  <script>
+    (function(){
+      var r=document.documentElement, b=document.getElementById('theme');
+      b.addEventListener('click',function(){ var t=r.getAttribute('data-theme')==='light'?'dark':'light'; r.setAttribute('data-theme',t); try{localStorage.setItem('theme',t)}catch(e){} });
+    })();
+  </script>
+</body>
+</html>
